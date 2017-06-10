@@ -30,8 +30,10 @@ Execute:
 The code is based on CERN scientific linux. Vagrant allows to develop and execute platform independent. All dependencies and
 instructions are enclosed in the single 'vagrantfile'. The machine has to have installed:
 
-* Virtualbox
-* Install Vagrant The Vagrant box in use is the CernVM.
+* [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
+* [Vagrant] (https://www.vagrantup.com/downloads.html)
+
+The Vagrant box in use is the CernVM.
 
 NOTE: By default this setup will use 2 cores and 2 GB of RAM. If you want to adjust these numbers, please edit the Vagrantfile before continuing.
 
