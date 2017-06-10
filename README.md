@@ -1,6 +1,7 @@
 # DDM
 Direct DM Pythia toy model
 
+Code for platform independent development at the bottom, first the actualy code: 
 
 ## Setting up environment and compile
 
@@ -17,8 +18,14 @@ cmake -DGeant4_DIR=/cvmfs/geant4.cern.ch/geant4/10.2.p02/x86_64-slc6-gcc49-opt/l
 make -j
 ```
 
+Execute:
+```bash
+./OpNovice
+```
 
-## instructions 
+
+
+## Vagrant instructions
 
 The code is based on CERN scientific linux. Vagrant allows to develop and execute platform independent. All dependencies and
 instructions are enclosed in the single 'vagrantfile'. The machine has to have installed:
