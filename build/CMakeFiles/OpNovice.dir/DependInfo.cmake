@@ -1,0 +1,59 @@
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/vagrant/OpNovice/OpNovice.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/OpNovice.cc.o"
+  "/vagrant/OpNovice/src/OpNoviceActionInitialization.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o"
+  "/vagrant/OpNovice/src/OpNoviceDetectorConstruction.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o"
+  "/vagrant/OpNovice/src/OpNovicePhysicsList.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o"
+  "/vagrant/OpNovice/src/OpNovicePhysicsListMessenger.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o"
+  "/vagrant/OpNovice/src/OpNovicePrimaryGeneratorAction.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o"
+  "/vagrant/OpNovice/src/OpNovicePrimaryGeneratorMessenger.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o"
+  "/vagrant/OpNovice/src/OpNoviceRunAction.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o"
+  "/vagrant/OpNovice/src/OpNoviceStackingAction.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o"
+  "/vagrant/OpNovice/src/OpNoviceSteppingAction.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o"
+  "/vagrant/OpNovice/src/OpNoviceSteppingVerbose.cc" "/vagrant/OpNovice/build/CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "G4GEOM_USE_USOLIDS"
+  "G4INTY_USE_QT"
+  "G4INTY_USE_XT"
+  "G4MULTITHREADED"
+  "G4UI_USE"
+  "G4UI_USE_QT"
+  "G4UI_USE_TCSH"
+  "G4UI_USE_XM"
+  "G4VERBOSE"
+  "G4VIS_USE"
+  "G4VIS_USE_OPENGL"
+  "G4VIS_USE_OPENGLQT"
+  "G4VIS_USE_OPENGLX"
+  "G4VIS_USE_OPENGLXM"
+  "G4VIS_USE_RAYTRACERX"
+  "G4_STORE_TRAJECTORY"
+  )
+
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc49-opt/include"
+  "/cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc49-opt/include/Geant4"
+  "/cvmfs/sft.cern.ch/lcg/releases/XercesC/3.1.3-05808/x86_64-slc6-gcc49-opt/include"
+  "/cvmfs/sft.cern.ch/lcg/releases/VecGeom/v0.3.rc-43240/x86_64-slc6-gcc49-opt/lib/CMake/USolids/../../../include"
+  "/cvmfs/sft.cern.ch/lcg/releases/qt/4.8.7-0b84e/x86_64-slc6-gcc49-opt/include"
+  "/cvmfs/sft.cern.ch/lcg/releases/qt/4.8.7-0b84e/x86_64-slc6-gcc49-opt/include/QtCore"
+  "/cvmfs/sft.cern.ch/lcg/releases/qt/4.8.7-0b84e/x86_64-slc6-gcc49-opt/include/QtGui"
+  "/cvmfs/sft.cern.ch/lcg/releases/qt/4.8.7-0b84e/x86_64-slc6-gcc49-opt/include/QtOpenGL"
+  "../include"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
