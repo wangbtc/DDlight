@@ -44,7 +44,7 @@ Just perform the following steps:
 3. Change into the project directory: ```cd DDlight```
 4. Lastly execute and ssh into virtual machine:
 ```bash
-vagrant up # can take a while, particular at first start
+vagrant up # can take a few min, particular at first start
 vagrant ssh
 cd /vagrant
 ```
