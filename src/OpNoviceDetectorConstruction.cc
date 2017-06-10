@@ -32,6 +32,7 @@
 
 #include "G4Element.hh"
 #include "G4LogicalBorderSurface.hh"
+#include "G4VisAttributes.hh"
 #include "G4LogicalSkinSurface.hh"
 #include "G4OpticalSurface.hh"
 #include "G4Box.hh"
@@ -312,34 +313,21 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
 //
   G4Box* expHall_box = new G4Box("World",fExpHall_x,fExpHall_y,fExpHall_z);
 
-  G4LogicalVolume* expHall_log
-    = new G4LogicalVolume(expHall_box,air,"World",0,0,0);
-
-  G4VPhysicalVolume* expHall_phys
-    = new G4PVPlacement(0,G4ThreeVector(),expHall_log,"World",0,false,0);
+  G4LogicalVolume* expHall_log = new G4LogicalVolume(expHall_box,air,"World",0,0,0);
+  G4VPhysicalVolume* expHall_phys = new G4PVPlacement(0,G4ThreeVector(),expHall_log,"World",0,false,0);
 
 // The Water Tank
 //
   G4Box* waterTank_box = new G4Box("Tank",fTank_x,fTank_y,fTank_z);
-
-  G4LogicalVolume* waterTank_log
-    = new G4LogicalVolume(waterTank_box,water,"Tank",0,0,0);
-
-  G4VPhysicalVolume* waterTank_phys
-    = new G4PVPlacement(0,G4ThreeVector(),waterTank_log,"Tank",
-                        expHall_log,false,0);
-
+  G4LogicalVolume* waterTank_log = new G4LogicalVolume(waterTank_box,water,"Tank",0,0,0);
+  G4VPhysicalVolume* waterTank_phys = new G4PVPlacement(0,G4ThreeVector(),waterTank_log,"Tank", expHall_log,false,0);
+  G4VisAttributes vis_attr_wat;  vis_attr_wat.SetColour(0,0,1);   waterTank_log->SetVisAttributes(vis_attr_wat);
 // The LXe
 //
   G4Box* LXeVol_box = new G4Box("LXeVol",fLXeVol_x,fLXeVol_y,fLXeVol_z);
-
-  G4LogicalVolume* LXeVol_log
-    = new G4LogicalVolume(LXeVol_box,fLXe,"LXeVol",0,0,0);
-
-  G4VPhysicalVolume* LXeVol_phys
-    = new G4PVPlacement(0,G4ThreeVector(),LXeVol_log,"LXeVol",
-                        expHall_log,false,0);
-
+  G4LogicalVolume* LXeVol_log = new G4LogicalVolume(LXeVol_box,fLXe,"LXeVol",0,0,0);
+  G4VPhysicalVolume* LXeVol_phys = new G4PVPlacement(0,G4ThreeVector(),LXeVol_log,"LXeVol", expHall_log,false,0);
+  G4VisAttributes vis_attr_lxe;  vis_attr_lxe.SetColour(1,0,0);   LXeVol_log->SetVisAttributes(vis_attr_lxe);
 
   // The Air Bubble
 //
@@ -372,8 +360,7 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   opLXeSurface->SetFinish(ground);
   opLXeSurface->SetModel(unified);
 
-  new G4LogicalBorderSurface("LXeSurface",
-                                 LXeVol_phys,expHall_phys,opLXeSurface);
+  new G4LogicalBorderSurface("LXeSurface", LXeVol_phys,expHall_phys,opLXeSurface);
 
 
   // Air Bubble
@@ -395,22 +382,44 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   //The PMTs
   // Photomultiplier: ETL 9829 QA ****************************************
 
-  G4double pmtHeight    = 12.0*cm;
-  G4double pmtRadius    = 2.6*cm;
+  //  G4double pmtHeight    = 12.0*cm;
+  //  G4double pmtRadius    = 2.6*cm;
+  G4double pmtHeight    = 20.0*cm;
+  G4double pmtRadius    = 50*cm;
   G4double pmtVOffset   = 1.0*cm;
   G4double pmtVPosition = 5*m;//-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
 
-   G4Sphere* pmt_window = new G4Sphere("pmt_sphere", 0.*cm, 2.*pmtRadius,
-				       0.*deg, 360.*deg, 0.*deg, 30.0*deg);
-   G4Tubs* pmt_tube = new G4Tubs("pmt_tube", 0.*cm,  pmtRadius, 0.5*pmtHeight,
-				 0.*deg, 360.*deg);
+  G4Sphere* pmt_window = new G4Sphere("pmt_sphere", 0.*cm, 2.*pmtRadius, 0.*deg, 360.*deg, 0.*deg, 30.0*deg);
+  G4Tubs* pmt_tube = new G4Tubs("pmt_tube", 0.*cm,  pmtRadius, 0.5*pmtHeight,0.*deg, 360.*deg);
   
-   G4UnionSolid* pmt_sol = new G4UnionSolid("pmt_sol", pmt_tube, pmt_window,
-    					    G4Transform3D(G4RotationMatrix(), G4ThreeVector(0,0,0.5*pmtHeight
-											    -2.*pmtRadius*std::cos(30.0*deg))));
+  G4UnionSolid* pmt_sol = new G4UnionSolid("pmt_sol", pmt_tube, pmt_window, G4Transform3D(G4RotationMatrix(), G4ThreeVector(0,0,0.5*pmtHeight -2.*pmtRadius*std::cos(30.0*deg))));
+  
+  pmt_log  = new G4LogicalVolume(pmt_sol, quartz, "pmt_log", 0,0,0);
+  pmt_phys = new G4PVPlacement(0,G4ThreeVector(0.*cm, 0.*cm, pmtVPosition), "pmt_phys", pmt_log, LXeVol_phys, false, 0);
 
-   
-  G4LogicalVolume* pmt_log  = new G4LogicalVolume(pmt_sol, quartz, "pmt_log", 0,0,0);
+  G4OpticalSurface* pmt_opsurf = new G4OpticalSurface("pmt_opsurf",unified, polished, dielectric_dielectric);
+  G4LogicalBorderSurface* pmt_surf =  new G4LogicalBorderSurface("pmt_surf", LXeVol_phys, pmt_phys, pmt_opsurf);
+
+  G4VisAttributes vis_attr;   vis_attr.SetColour(1.0, 0.0, 1.0);  pmt_log->SetVisAttributes(vis_attr);
+
+  //  pmt_log->GetVisAttributes()->SetColour(0.0, 0.0, 1.0);
+  //  pmt_log->SetVisAttributes(G4VisAttribute(0,1,0));
+
+  //  pmt_log->SetColor(blue)
+  //  G4VisAttributes* pmt_surf= new G4VisAttributes(blue);
+//   G4VisAttributes* pmt_vat= new G4VisAttributes(blue);
+//   pmt_vat->SetForceSolid(true);
+//   pmt_vat->SetVisibility(true);
+//   pmt_log->SetVisAttributes(pmt_vat);
+//				 "pmt_phys", pmt_log
+//   pmt_log  = new G4LogicalVolume(pmt_sol, pmt_mat, "pmt_log");
+
+
+   //works, toy
+//   G4Box* pmt_box = new G4Box("pmtvol",fLXeVol_x,-fLXeVol_y/2,fLXeVol_z/2);
+//   G4LogicalVolume* pmt_log = new G4LogicalVolume(pmt_box,fLXe,"pmtvol",0,0,0); 
+//   G4VPhysicalVolume* pmt_phys = new G4PVPlacement(0,G4ThreeVector(),pmt_log,"pmtvol", expHall_log,false,0);
+
   // G4VPhysicalVolume pmt_phys = new G4PVPlacement(0,G4ThreeVector(0.*cm, 0.*cm, pmtVPosition),
 //  						 "pmt_phys", pmt_log, LXeVol_box, false, 0);
 
