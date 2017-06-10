@@ -30,10 +30,13 @@ NOTE: By default this setup will use 2 cores and 2 GB of RAM. If you want to adj
 
 Just perform the following steps:
 
-1. Clone repository: git clone
-Open terminal (or powershell on Windows)
-cd into the project directory
+1. Clone repository: ```git clone https://github.com/bpenning/DDlight DDlight```
+2. Open terminal (or powershell on Windows)
+3. Change into the project directory
+4. 
+```bash
 vagrant up # can take a while
-vagrant ssh
-cd /vagrant
+ vagrant ssh
+ cd /vagrant
+```
 
