@@ -31,7 +31,7 @@ The code is based on CERN scientific linux. Vagrant allows to develop and execut
 instructions are enclosed in the single 'vagrantfile'. The machine has to have installed:
 
 * [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
-* [Vagrant] (https://www.vagrantup.com/downloads.html)
+* [Vagrant](https://www.vagrantup.com/downloads.html)
 
 The Vagrant box in use is the CernVM.
 
