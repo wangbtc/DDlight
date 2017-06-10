@@ -48,7 +48,5 @@ vagrant up # can take a while, particular at first start
 vagrant ssh
 cd /vagrant
 ```
-Other useful commands after work is done is ```vagrant suspend``` and ```vagrand halt```.
 
-
-Now follow the instructions above for initialising the development environment, compile and execute the code.
+Now follow the instructions above for initialising the development environment, compile and execute the code. Other useful commands after work is done is ```vagrant suspend``` and ```vagrand halt```.
