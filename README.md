@@ -44,7 +44,7 @@ Just perform the following steps:
 3. Change into the project directory
 4. Lastly execute and ssh into virtual machine:
 ```bash
-vagrant up # can take a while
+vagrant up # can take a while, particular at first start
 vagrant ssh
 cd /vagrant
 ```
