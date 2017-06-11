@@ -327,7 +327,7 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   G4Box* LXeVol_box = new G4Box("LXeVol",fLXeVol_x,fLXeVol_y,fLXeVol_z);
   G4LogicalVolume* LXeVol_log = new G4LogicalVolume(LXeVol_box,fLXe,"LXeVol",0,0,0);
   G4VPhysicalVolume* LXeVol_phys = new G4PVPlacement(0,G4ThreeVector(),LXeVol_log,"LXeVol", expHall_log,false,0);
-  G4VisAttributes vis_attr_lxe;  vis_attr_lxe.SetColour(1,0,0);   LXeVol_log->SetVisAttributes(vis_attr_lxe);
+  G4VisAttributes vis_attr_lxe;  vis_attr_lxe.SetColour(1,0,0); vis_attr_lxe.SetForceSolid(true); LXeVol_log->SetVisAttributes(vis_attr_lxe);
 
   // The Air Bubble
 //
@@ -399,13 +399,9 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
 
   G4OpticalSurface* pmt_opsurf = new G4OpticalSurface("pmt_opsurf",unified, polished, dielectric_dielectric);
   G4LogicalBorderSurface* pmt_surf =  new G4LogicalBorderSurface("pmt_surf", LXeVol_phys, pmt_phys, pmt_opsurf);
+  G4VisAttributes vis_attr;   vis_attr.SetColour(1.0, 0.0, 1.0);  vis_attr.SetForceSolid(true); pmt_log->SetVisAttributes(vis_attr);
 
-  G4VisAttributes vis_attr;   vis_attr.SetColour(1.0, 0.0, 1.0);  pmt_log->SetVisAttributes(vis_attr);
-
-  //  pmt_log->GetVisAttributes()->SetColour(0.0, 0.0, 1.0);
-  //  pmt_log->SetVisAttributes(G4VisAttribute(0,1,0));
-
-  //  pmt_log->SetColor(blue)
+  
   //  G4VisAttributes* pmt_surf= new G4VisAttributes(blue);
 //   G4VisAttributes* pmt_vat= new G4VisAttributes(blue);
 //   pmt_vat->SetForceSolid(true);
