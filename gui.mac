@@ -6,6 +6,9 @@
 # Process vis.mac (and draw geometry)
 #
 /control/execute vis.mac
+#/vis/viewer/set/style surface
+/vis/open OGL
+/vis/viewer/set/viewpointThetaPhi 70 20
 #
 # Add icons of general interest
 #
@@ -49,3 +52,5 @@
 #
 # User defined icon :
 /gui/addIcon "Run beam on" user_icon "/run/beamOn 1" run.png 
+
+

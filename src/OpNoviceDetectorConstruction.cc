@@ -388,7 +388,7 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   G4double pmtHeight    = 20.0*cm;
   G4double pmtRadius    = 50*cm;
   G4double pmtVOffset   = 1.0*cm;
-  G4double pmtVPosition = 5*m;//-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
+  G4double pmtVPosition = -5*m;//-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
 
   G4Sphere* pmt_window = new G4Sphere("pmt_sphere", 0.*cm, 2.*pmtRadius, 0.*deg, 360.*deg, 0.*deg, 30.0*deg);
   G4Tubs* pmt_tube = new G4Tubs("pmt_tube", 0.*cm,  pmtRadius, 0.5*pmtHeight,0.*deg, 360.*deg);
@@ -407,7 +407,6 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   G4double phcathVPosition  = phcathVOffset;
   G4Sphere* phcath_sol = new G4Sphere("phcath_sphere",2.*pmtRadius-1.6*mm, 2.*pmtRadius-1.59*mm, 0.*deg, 360.*deg, 0.*deg, 27.0*deg);  
 
-
   //BP todo: at some point move all materials into sepearet file. Lot of clutter
   // aluminium
   G4Element* Al = new G4Element("Aluminium"  ,"Al" , z= 13., a=26.98*g/mole);
@@ -425,9 +424,37 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   cathmetal_mt->AddProperty("ABSLENGTH", cathmetal_PP, cathmetal_ABSL, 3);
   cathmetalAl->SetMaterialPropertiesTable(cathmetal_mt);
 
-  G4OpticalSurface*  phcath_opsurf = new G4OpticalSurface("phcath_opsurf", unified, polished, dielectric_dielectric);
+  //bp now continue with building photo cathode
+  G4LogicalVolume* phcath_log  = new G4LogicalVolume(phcath_sol, cathmetalAl, "phcath_log");
+  G4PVPlacement* phcath_phys = new G4PVPlacement(0, G4ThreeVector(0., 0., phcathVPosition), "phcath_phys", phcath_log, pmt_phys, false, 0);
 
-  //  G4LogicalVolume* phcath_log  = new G4LogicalVolume(phcath_sol, phcath_mat, "phcath_log");
+
+  //now its surface
+  G4OpticalSurface*  phcath_opsurf = new G4OpticalSurface("phcath_opsurf", unified, polished, dielectric_dielectric);
+  new G4LogicalBorderSurface("phcath_surf", pmt_phys, phcath_phys, phcath_opsurf);
+
+  G4double phcath_PP[2]   = { 6.00*eV, 7.50*eV };
+  // G4double phcath_REFL[2] = { 0.0, 0.0};
+  // G4MaterialPropertiesTable* phcath_mt = new G4MaterialPropertiesTable();
+  // phcath_mt->AddProperty("REFLECTIVITY", phcath_PP, phcath_REFL, 2);
+  // phcath_opsurf->SetMaterialPropertiesTable(phcath_mt);
+
+
+  //**Photocathode surface properties
+  G4double photocath_EFF[2]={1.,1.}; //Enables 'detection' of photons
+  G4double photocath_ReR[2]={1.92,1.92};
+  G4double photocath_ImR[2]={1.69,1.69};
+  G4MaterialPropertiesTable* photocath_mt = new G4MaterialPropertiesTable();
+  photocath_mt->AddProperty("EFFICIENCY",phcath_PP,photocath_EFF,2);
+  photocath_mt->AddProperty("REALRINDEX",phcath_PP,photocath_ReR,2);
+  photocath_mt->AddProperty("IMAGINARYRINDEX",phcath_PP,photocath_ImR,2);
+  G4OpticalSurface* photocath_opsurf=
+    new G4OpticalSurface("photocath_opsurf",glisur,polished,
+                         dielectric_metal);
+  photocath_opsurf->SetMaterialPropertiesTable(photocath_mt);
+
+  G4VisAttributes phcath_vat;   phcath_vat.SetColour(0.0, 1.0, 1.0);  phcath_vat.SetForceSolid(true); phcath_vat.SetVisibility(true); phcath_log->SetVisAttributes(vis_attr);
+  new G4LogicalSkinSurface("photocath_surf",phcath_log,photocath_opsurf);
 
   //bp
 
