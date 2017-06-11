@@ -329,6 +329,7 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   G4VPhysicalVolume* LXeVol_phys = new G4PVPlacement(0,G4ThreeVector(),LXeVol_log,"LXeVol", expHall_log,false,0);
   G4VisAttributes vis_attr_lxe;  vis_attr_lxe.SetColour(1,0,0); vis_attr_lxe.SetForceSolid(true); LXeVol_log->SetVisAttributes(vis_attr_lxe);
 
+
   // The Air Bubble
 //
 //   G4Box* bubbleAir_box = new G4Box("Bubble",fBubble_x,fBubble_y,fBubble_z);
@@ -401,14 +402,34 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   G4LogicalBorderSurface* pmt_surf =  new G4LogicalBorderSurface("pmt_surf", LXeVol_phys, pmt_phys, pmt_opsurf);
   G4VisAttributes vis_attr;   vis_attr.SetColour(1.0, 0.0, 1.0);  vis_attr.SetForceSolid(true); pmt_log->SetVisAttributes(vis_attr);
 
-  
-  //  G4VisAttributes* pmt_surf= new G4VisAttributes(blue);
-//   G4VisAttributes* pmt_vat= new G4VisAttributes(blue);
-//   pmt_vat->SetForceSolid(true);
-//   pmt_vat->SetVisibility(true);
-//   pmt_log->SetVisAttributes(pmt_vat);
-//				 "pmt_phys", pmt_log
-//   pmt_log  = new G4LogicalVolume(pmt_sol, pmt_mat, "pmt_log");
+  //now need to set PMT surface atrributes and make sure they are registered
+  G4double phcathVOffset    = 0.5*pmtHeight-2.*pmtRadius*std::cos(30.0*deg);
+  G4double phcathVPosition  = phcathVOffset;
+  G4Sphere* phcath_sol = new G4Sphere("phcath_sphere",2.*pmtRadius-1.6*mm, 2.*pmtRadius-1.59*mm, 0.*deg, 360.*deg, 0.*deg, 27.0*deg);  
+
+
+  //BP todo: at some point move all materials into sepearet file. Lot of clutter
+  // aluminium
+  G4Element* Al = new G4Element("Aluminium"  ,"Al" , z= 13., a=26.98*g/mole);
+  G4Material* metalAl = new G4Material("MetalAluminium", density=2.700*g/cm3, nelements=1);
+  metalAl->AddElement(Al, 1);
+
+  // photocathode aluminium
+  G4Material* cathmetalAl = new G4Material("CathodeMetalAluminium", density=2.700*g/cm3, nelements=1);
+  cathmetalAl->AddElement(Al, 1);
+  G4double cathmetal_PP[3]   = { 5.0*eV, 6.69*eV, 7.50*eV };
+  G4double cathmetal_RIND[3] = { 1.51, 1.57, 1.61 };     // ref index
+  G4double cathmetal_ABSL[3] = { 1.e-20*m,  1.e-20*m,  1.e-20*m };// atten length
+  G4MaterialPropertiesTable *cathmetal_mt = new G4MaterialPropertiesTable();
+  cathmetal_mt->AddProperty("RINDEX", cathmetal_PP, cathmetal_RIND,3);
+  cathmetal_mt->AddProperty("ABSLENGTH", cathmetal_PP, cathmetal_ABSL, 3);
+  cathmetalAl->SetMaterialPropertiesTable(cathmetal_mt);
+
+  G4OpticalSurface*  phcath_opsurf = new G4OpticalSurface("phcath_opsurf", unified, polished, dielectric_dielectric);
+
+  //  G4LogicalVolume* phcath_log  = new G4LogicalVolume(phcath_sol, phcath_mat, "phcath_log");
+
+  //bp
 
 
    //works, toy
