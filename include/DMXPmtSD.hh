@@ -24,67 +24,52 @@
 // ********************************************************************
 //
 //
+// --------------------------------------------------------------
+//   GEANT 4 - Underground Dark Matter Detector Advanced Example
 //
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//      For information related to this code contact: Alex Howard
+//      e-mail: alexander.howard@cern.ch
+// --------------------------------------------------------------
+// Comments
+//
+//                  Underground Advanced
+//               by A. Howard and H. Araujo 
+//                    (27th November 2001)
+//
+// PmtSD (sensitive detector) header
+// --------------------------------------------------------------
 
-#ifndef OpNoviceDetectorConstruction_h
-#define OpNoviceDetectorConstruction_h 1
+#ifndef DMXPmtSD_h
+#define DMXPmtSD_h 1
 
-#include "G4Material.hh"
+
+
+#include "G4VSensitiveDetector.hh"
 #include "globals.hh"
-#include "G4VUserDetectorConstruction.hh"
-#include "G4Cache.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+#include "DMXPmtHit.hh"
 
-class DMXPmtSD;
+class G4Step;
+class G4HCofThisEvent;
 
-class OpNoviceDetectorConstruction : public G4VUserDetectorConstruction
-{
-  public:
-    OpNoviceDetectorConstruction();
-    virtual ~OpNoviceDetectorConstruction();
-    void ConstructSDandField();
+class DMXPmtSD : public G4VSensitiveDetector {
+
+   public:
   
-  public:
-    virtual G4VPhysicalVolume* Construct();
-
+     DMXPmtSD(G4String);
+     ~DMXPmtSD();
+  
+     void Initialize(G4HCofThisEvent*);
+     G4bool ProcessHits(G4Step*,G4TouchableHistory*);
+     void EndOfEvent(G4HCofThisEvent*);
+     void clear();
+     void DrawAll();
+     void PrintAll();
+  
   private:
-    G4double fExpHall_x;
-    G4double fExpHall_y;
-    G4double fExpHall_z;
-
-    G4double fTank_x;
-    G4double fTank_y;
-    G4double fTank_z;
   
-    G4double fLXeVol_x;
-    G4double fLXeVol_y;
-    G4double fLXeVol_z;
-
-    G4double fBubble_x;
-    G4double fBubble_y;
-    G4double fBubble_z;
-
-  //Materials & Elements
-    G4Material* fLXe;
-
-  //Geometry
-  G4MaterialPropertiesTable* fLXe_mt;
-
-  //Volumes
-  G4LogicalVolume*   pmt_log;
-  G4VPhysicalVolume* pmt_phys;
-
-  G4LogicalVolume*   phcath_log;
-  G4VPhysicalVolume* phcath_phys;
-
-
-  //  pointer to sensitive detectors
-  G4Cache<DMXPmtSD*> pmtSD;
+     DMXPmtHitsCollection* pmtCollection;
+     G4int HitID;
 };
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-#endif /*OpNoviceDetectorConstruction_h*/
+#endif

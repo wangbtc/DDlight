@@ -29,6 +29,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #include "OpNoviceDetectorConstruction.hh"
+#include "DMXPmtSD.hh"
 
 #include "G4Element.hh"
 #include "G4LogicalBorderSurface.hh"
@@ -54,6 +55,9 @@ OpNoviceDetectorConstruction::OpNoviceDetectorConstruction()
   fTank_x    = fTank_y    = fTank_z    =  5.0*m;
   fLXeVol_x    = fLXeVol_y    = fLXeVol_z    =  1.0*m;
   fBubble_x  = fBubble_y  = fBubble_z  =  0.5*m;
+
+  //Zero the G4Cache objects to contain logical volumes
+  pmtSD.Put(0);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -425,8 +429,8 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   cathmetalAl->SetMaterialPropertiesTable(cathmetal_mt);
 
   //bp now continue with building photo cathode
-  G4LogicalVolume* phcath_log  = new G4LogicalVolume(phcath_sol, cathmetalAl, "phcath_log");
-  G4PVPlacement* phcath_phys = new G4PVPlacement(0, G4ThreeVector(0., 0., phcathVPosition), "phcath_phys", phcath_log, pmt_phys, false, 0);
+  phcath_log  = new G4LogicalVolume(phcath_sol, cathmetalAl, "phcath_log");
+  phcath_phys = new G4PVPlacement(0, G4ThreeVector(0., 0., phcathVPosition), "phcath_phys", phcath_log, pmt_phys, false, 0);
 
 
   //now its surface
@@ -546,4 +550,34 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   return expHall_phys;
 }
 
+void OpNoviceDetectorConstruction::ConstructSDandField()
+{
+  // ......................................................................
+  // sensitive detectors ..................................................
+  // ......................................................................
+
+//   if (LXeSD.Get() == 0)
+//     {
+//       G4String name="/DMXDet/LXeSD";
+//       DMXScintSD* aSD = new DMXScintSD(name);
+//       LXeSD.Put(aSD);
+//     }
+//   if (LXe_log)
+//     SetSensitiveDetector(LXe_log,LXeSD.Get());
+
+  if (pmtSD.Get() == 0)
+    {
+      G4String name="/DMXDet/pmtSD";
+      DMXPmtSD* aSD = new DMXPmtSD(name);
+      pmtSD.Put(aSD);
+    }
+
+  if (phcath_log)
+    SetSensitiveDetector(phcath_log,pmtSD.Get());
+  
+  return;
+}
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+
