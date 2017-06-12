@@ -35,9 +35,9 @@ instructions are enclosed in the single 'vagrantfile'. The machine has to have i
 
 The Vagrant box in use is the CernVM.
 
-NOTE: By default this setup will use 2 cores and 2 GB of RAM. If you want to adjust these numbers, please edit the Vagrantfile before continuing.
+NOTE: By default this setup will use 2 cores and 2 GB of RAM. To adjust these numbers edit the Vagrantfile before continuing. 
 
-Just perform the following steps:
+Perform the following steps:
 
 1. Clone repository: ```git clone https://github.com/bpenning/DDlight DDlight```
 2. Open terminal (or powershell on Windows)
