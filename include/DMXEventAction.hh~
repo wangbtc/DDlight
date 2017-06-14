@@ -52,7 +52,7 @@
 class DMXRunAction;
 class DMXPrimaryGeneratorAction;
 class DMXEventActionMessenger;
-//class DMXAnalysisManager;
+class DMXAnalysisManager;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 class DMXEventAction : public G4UserEventAction {

@@ -194,6 +194,114 @@ OpNovice.cc.s:
 	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/OpNovice.cc.s
 .PHONY : OpNovice.cc.s
 
+src/DMXEventAction.o: src/DMXEventAction.cc.o
+
+.PHONY : src/DMXEventAction.o
+
+# target to build an object file
+src/DMXEventAction.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o
+.PHONY : src/DMXEventAction.cc.o
+
+src/DMXEventAction.i: src/DMXEventAction.cc.i
+
+.PHONY : src/DMXEventAction.i
+
+# target to preprocess a source file
+src/DMXEventAction.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.i
+.PHONY : src/DMXEventAction.cc.i
+
+src/DMXEventAction.s: src/DMXEventAction.cc.s
+
+.PHONY : src/DMXEventAction.s
+
+# target to generate assembly for a file
+src/DMXEventAction.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.s
+.PHONY : src/DMXEventAction.cc.s
+
+src/DMXEventActionMessenger.o: src/DMXEventActionMessenger.cc.o
+
+.PHONY : src/DMXEventActionMessenger.o
+
+# target to build an object file
+src/DMXEventActionMessenger.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o
+.PHONY : src/DMXEventActionMessenger.cc.o
+
+src/DMXEventActionMessenger.i: src/DMXEventActionMessenger.cc.i
+
+.PHONY : src/DMXEventActionMessenger.i
+
+# target to preprocess a source file
+src/DMXEventActionMessenger.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.i
+.PHONY : src/DMXEventActionMessenger.cc.i
+
+src/DMXEventActionMessenger.s: src/DMXEventActionMessenger.cc.s
+
+.PHONY : src/DMXEventActionMessenger.s
+
+# target to generate assembly for a file
+src/DMXEventActionMessenger.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.s
+.PHONY : src/DMXEventActionMessenger.cc.s
+
+src/DMXParticleSource.o: src/DMXParticleSource.cc.o
+
+.PHONY : src/DMXParticleSource.o
+
+# target to build an object file
+src/DMXParticleSource.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o
+.PHONY : src/DMXParticleSource.cc.o
+
+src/DMXParticleSource.i: src/DMXParticleSource.cc.i
+
+.PHONY : src/DMXParticleSource.i
+
+# target to preprocess a source file
+src/DMXParticleSource.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.i
+.PHONY : src/DMXParticleSource.cc.i
+
+src/DMXParticleSource.s: src/DMXParticleSource.cc.s
+
+.PHONY : src/DMXParticleSource.s
+
+# target to generate assembly for a file
+src/DMXParticleSource.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.s
+.PHONY : src/DMXParticleSource.cc.s
+
+src/DMXParticleSourceMessenger.o: src/DMXParticleSourceMessenger.cc.o
+
+.PHONY : src/DMXParticleSourceMessenger.o
+
+# target to build an object file
+src/DMXParticleSourceMessenger.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o
+.PHONY : src/DMXParticleSourceMessenger.cc.o
+
+src/DMXParticleSourceMessenger.i: src/DMXParticleSourceMessenger.cc.i
+
+.PHONY : src/DMXParticleSourceMessenger.i
+
+# target to preprocess a source file
+src/DMXParticleSourceMessenger.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.i
+.PHONY : src/DMXParticleSourceMessenger.cc.i
+
+src/DMXParticleSourceMessenger.s: src/DMXParticleSourceMessenger.cc.s
+
+.PHONY : src/DMXParticleSourceMessenger.s
+
+# target to generate assembly for a file
+src/DMXParticleSourceMessenger.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.s
+.PHONY : src/DMXParticleSourceMessenger.cc.s
+
 src/DMXPmtHit.o: src/DMXPmtHit.cc.o
 
 .PHONY : src/DMXPmtHit.o
@@ -247,6 +355,141 @@ src/DMXPmtSD.s: src/DMXPmtSD.cc.s
 src/DMXPmtSD.cc.s:
 	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.s
 .PHONY : src/DMXPmtSD.cc.s
+
+src/DMXPrimaryGeneratorAction.o: src/DMXPrimaryGeneratorAction.cc.o
+
+.PHONY : src/DMXPrimaryGeneratorAction.o
+
+# target to build an object file
+src/DMXPrimaryGeneratorAction.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o
+.PHONY : src/DMXPrimaryGeneratorAction.cc.o
+
+src/DMXPrimaryGeneratorAction.i: src/DMXPrimaryGeneratorAction.cc.i
+
+.PHONY : src/DMXPrimaryGeneratorAction.i
+
+# target to preprocess a source file
+src/DMXPrimaryGeneratorAction.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.i
+.PHONY : src/DMXPrimaryGeneratorAction.cc.i
+
+src/DMXPrimaryGeneratorAction.s: src/DMXPrimaryGeneratorAction.cc.s
+
+.PHONY : src/DMXPrimaryGeneratorAction.s
+
+# target to generate assembly for a file
+src/DMXPrimaryGeneratorAction.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.s
+.PHONY : src/DMXPrimaryGeneratorAction.cc.s
+
+src/DMXRunAction.o: src/DMXRunAction.cc.o
+
+.PHONY : src/DMXRunAction.o
+
+# target to build an object file
+src/DMXRunAction.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o
+.PHONY : src/DMXRunAction.cc.o
+
+src/DMXRunAction.i: src/DMXRunAction.cc.i
+
+.PHONY : src/DMXRunAction.i
+
+# target to preprocess a source file
+src/DMXRunAction.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.i
+.PHONY : src/DMXRunAction.cc.i
+
+src/DMXRunAction.s: src/DMXRunAction.cc.s
+
+.PHONY : src/DMXRunAction.s
+
+# target to generate assembly for a file
+src/DMXRunAction.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.s
+.PHONY : src/DMXRunAction.cc.s
+
+src/DMXRunActionMessenger.o: src/DMXRunActionMessenger.cc.o
+
+.PHONY : src/DMXRunActionMessenger.o
+
+# target to build an object file
+src/DMXRunActionMessenger.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o
+.PHONY : src/DMXRunActionMessenger.cc.o
+
+src/DMXRunActionMessenger.i: src/DMXRunActionMessenger.cc.i
+
+.PHONY : src/DMXRunActionMessenger.i
+
+# target to preprocess a source file
+src/DMXRunActionMessenger.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.i
+.PHONY : src/DMXRunActionMessenger.cc.i
+
+src/DMXRunActionMessenger.s: src/DMXRunActionMessenger.cc.s
+
+.PHONY : src/DMXRunActionMessenger.s
+
+# target to generate assembly for a file
+src/DMXRunActionMessenger.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.s
+.PHONY : src/DMXRunActionMessenger.cc.s
+
+src/DMXScintHit.o: src/DMXScintHit.cc.o
+
+.PHONY : src/DMXScintHit.o
+
+# target to build an object file
+src/DMXScintHit.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o
+.PHONY : src/DMXScintHit.cc.o
+
+src/DMXScintHit.i: src/DMXScintHit.cc.i
+
+.PHONY : src/DMXScintHit.i
+
+# target to preprocess a source file
+src/DMXScintHit.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.i
+.PHONY : src/DMXScintHit.cc.i
+
+src/DMXScintHit.s: src/DMXScintHit.cc.s
+
+.PHONY : src/DMXScintHit.s
+
+# target to generate assembly for a file
+src/DMXScintHit.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.s
+.PHONY : src/DMXScintHit.cc.s
+
+src/DMXScintSD.o: src/DMXScintSD.cc.o
+
+.PHONY : src/DMXScintSD.o
+
+# target to build an object file
+src/DMXScintSD.cc.o:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o
+.PHONY : src/DMXScintSD.cc.o
+
+src/DMXScintSD.i: src/DMXScintSD.cc.i
+
+.PHONY : src/DMXScintSD.i
+
+# target to preprocess a source file
+src/DMXScintSD.cc.i:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.i
+.PHONY : src/DMXScintSD.cc.i
+
+src/DMXScintSD.s: src/DMXScintSD.cc.s
+
+.PHONY : src/DMXScintSD.s
+
+# target to generate assembly for a file
+src/DMXScintSD.cc.s:
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.s
+.PHONY : src/DMXScintSD.cc.s
 
 src/OpNoviceActionInitialization.o: src/OpNoviceActionInitialization.cc.o
 
@@ -534,12 +777,39 @@ help:
 	@echo "... OpNovice.o"
 	@echo "... OpNovice.i"
 	@echo "... OpNovice.s"
+	@echo "... src/DMXEventAction.o"
+	@echo "... src/DMXEventAction.i"
+	@echo "... src/DMXEventAction.s"
+	@echo "... src/DMXEventActionMessenger.o"
+	@echo "... src/DMXEventActionMessenger.i"
+	@echo "... src/DMXEventActionMessenger.s"
+	@echo "... src/DMXParticleSource.o"
+	@echo "... src/DMXParticleSource.i"
+	@echo "... src/DMXParticleSource.s"
+	@echo "... src/DMXParticleSourceMessenger.o"
+	@echo "... src/DMXParticleSourceMessenger.i"
+	@echo "... src/DMXParticleSourceMessenger.s"
 	@echo "... src/DMXPmtHit.o"
 	@echo "... src/DMXPmtHit.i"
 	@echo "... src/DMXPmtHit.s"
 	@echo "... src/DMXPmtSD.o"
 	@echo "... src/DMXPmtSD.i"
 	@echo "... src/DMXPmtSD.s"
+	@echo "... src/DMXPrimaryGeneratorAction.o"
+	@echo "... src/DMXPrimaryGeneratorAction.i"
+	@echo "... src/DMXPrimaryGeneratorAction.s"
+	@echo "... src/DMXRunAction.o"
+	@echo "... src/DMXRunAction.i"
+	@echo "... src/DMXRunAction.s"
+	@echo "... src/DMXRunActionMessenger.o"
+	@echo "... src/DMXRunActionMessenger.i"
+	@echo "... src/DMXRunActionMessenger.s"
+	@echo "... src/DMXScintHit.o"
+	@echo "... src/DMXScintHit.i"
+	@echo "... src/DMXScintHit.s"
+	@echo "... src/DMXScintSD.o"
+	@echo "... src/DMXScintSD.i"
+	@echo "... src/DMXScintSD.s"
 	@echo "... src/OpNoviceActionInitialization.o"
 	@echo "... src/OpNoviceActionInitialization.i"
 	@echo "... src/OpNoviceActionInitialization.s"

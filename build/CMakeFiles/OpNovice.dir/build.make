@@ -81,9 +81,105 @@ CMakeFiles/OpNovice.dir/OpNovice.cc.o.provides: CMakeFiles/OpNovice.dir/OpNovice
 CMakeFiles/OpNovice.dir/OpNovice.cc.o.provides.build: CMakeFiles/OpNovice.dir/OpNovice.cc.o
 
 
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o: ../src/DMXEventAction.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o -c /vagrant/src/DMXEventAction.cc
+
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXEventAction.cc > CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXEventAction.cc -o CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o: ../src/DMXEventActionMessenger.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o -c /vagrant/src/DMXEventActionMessenger.cc
+
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXEventActionMessenger.cc > CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXEventActionMessenger.cc -o CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o: ../src/DMXParticleSource.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o -c /vagrant/src/DMXParticleSource.cc
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXParticleSource.cc > CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXParticleSource.cc -o CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o: ../src/DMXParticleSourceMessenger.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o -c /vagrant/src/DMXParticleSourceMessenger.cc
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXParticleSourceMessenger.cc > CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXParticleSourceMessenger.cc -o CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o
+
+
 CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o: ../src/DMXPmtHit.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o -c /vagrant/src/DMXPmtHit.cc
 
 CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.i: cmake_force
@@ -107,7 +203,7 @@ CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o.provides.build: CMakeFiles/OpNovice.d
 
 CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o: ../src/DMXPmtSD.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o -c /vagrant/src/DMXPmtSD.cc
 
 CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.i: cmake_force
@@ -129,9 +225,129 @@ CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o.provides: CMakeFiles/OpNovice.dir/src/
 CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o
 
 
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o: ../src/DMXPrimaryGeneratorAction.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o -c /vagrant/src/DMXPrimaryGeneratorAction.cc
+
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXPrimaryGeneratorAction.cc > CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXPrimaryGeneratorAction.cc -o CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o: ../src/DMXRunAction.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o -c /vagrant/src/DMXRunAction.cc
+
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXRunAction.cc > CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXRunAction.cc -o CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o: ../src/DMXRunActionMessenger.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o -c /vagrant/src/DMXRunActionMessenger.cc
+
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXRunActionMessenger.cc > CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXRunActionMessenger.cc -o CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o: ../src/DMXScintHit.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o -c /vagrant/src/DMXScintHit.cc
+
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXScintHit.cc > CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXScintHit.cc -o CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o
+
+
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o: CMakeFiles/OpNovice.dir/flags.make
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o: ../src/DMXScintSD.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o -c /vagrant/src/DMXScintSD.cc
+
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.i"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /vagrant/src/DMXScintSD.cc > CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.i
+
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.s"
+	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /vagrant/src/DMXScintSD.cc -o CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.s
+
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.requires:
+
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.requires
+
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.provides: CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.requires
+	$(MAKE) -f CMakeFiles/OpNovice.dir/build.make CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.provides.build
+.PHONY : CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.provides
+
+CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.provides.build: CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o
+
+
 CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o: ../src/OpNoviceActionInitialization.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o -c /vagrant/src/OpNoviceActionInitialization.cc
 
 CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.i: cmake_force
@@ -155,7 +371,7 @@ CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o.provides.build: CM
 
 CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o: ../src/OpNoviceDetectorConstruction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o -c /vagrant/src/OpNoviceDetectorConstruction.cc
 
 CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.i: cmake_force
@@ -179,7 +395,7 @@ CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o.provides.build: CM
 
 CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o: ../src/OpNovicePhysicsList.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o -c /vagrant/src/OpNovicePhysicsList.cc
 
 CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.i: cmake_force
@@ -203,7 +419,7 @@ CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o.provides.build: CMakeFiles/
 
 CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o: ../src/OpNovicePhysicsListMessenger.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o -c /vagrant/src/OpNovicePhysicsListMessenger.cc
 
 CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.i: cmake_force
@@ -227,7 +443,7 @@ CMakeFiles/OpNovice.dir/src/OpNovicePhysicsListMessenger.cc.o.provides.build: CM
 
 CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o: ../src/OpNovicePrimaryGeneratorAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o -c /vagrant/src/OpNovicePrimaryGeneratorAction.cc
 
 CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.i: cmake_force
@@ -251,7 +467,7 @@ CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorAction.cc.o.provides.build: 
 
 CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o: ../src/OpNovicePrimaryGeneratorMessenger.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o -c /vagrant/src/OpNovicePrimaryGeneratorMessenger.cc
 
 CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.i: cmake_force
@@ -275,7 +491,7 @@ CMakeFiles/OpNovice.dir/src/OpNovicePrimaryGeneratorMessenger.cc.o.provides.buil
 
 CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o: ../src/OpNoviceRunAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o -c /vagrant/src/OpNoviceRunAction.cc
 
 CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.i: cmake_force
@@ -299,7 +515,7 @@ CMakeFiles/OpNovice.dir/src/OpNoviceRunAction.cc.o.provides.build: CMakeFiles/Op
 
 CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o: ../src/OpNoviceStackingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o -c /vagrant/src/OpNoviceStackingAction.cc
 
 CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.i: cmake_force
@@ -323,7 +539,7 @@ CMakeFiles/OpNovice.dir/src/OpNoviceStackingAction.cc.o.provides.build: CMakeFil
 
 CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o: ../src/OpNoviceSteppingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o -c /vagrant/src/OpNoviceSteppingAction.cc
 
 CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.i: cmake_force
@@ -347,7 +563,7 @@ CMakeFiles/OpNovice.dir/src/OpNoviceSteppingAction.cc.o.provides.build: CMakeFil
 
 CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o: CMakeFiles/OpNovice.dir/flags.make
 CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o: ../src/OpNoviceSteppingVerbose.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o"
 	/cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/bin/g++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o -c /vagrant/src/OpNoviceSteppingVerbose.cc
 
 CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.i: cmake_force
@@ -372,8 +588,17 @@ CMakeFiles/OpNovice.dir/src/OpNoviceSteppingVerbose.cc.o.provides.build: CMakeFi
 # Object files for target OpNovice
 OpNovice_OBJECTS = \
 "CMakeFiles/OpNovice.dir/OpNovice.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o" \
 "CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o" \
 "CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o" \
+"CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o" \
 "CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o" \
 "CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o" \
 "CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o" \
@@ -389,8 +614,17 @@ OpNovice_OBJECTS = \
 OpNovice_EXTERNAL_OBJECTS =
 
 OpNovice: CMakeFiles/OpNovice.dir/OpNovice.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o
 OpNovice: CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o
 OpNovice: CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o
+OpNovice: CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o
 OpNovice: CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o
 OpNovice: CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o
 OpNovice: CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o
@@ -450,7 +684,7 @@ OpNovice: /cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc49-opt/lib64/libG4i
 OpNovice: /cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc49-opt/lib64/libG4global.so
 OpNovice: /cvmfs/sft.cern.ch/lcg/views/LCG_88/x86_64-slc6-gcc49-opt/lib/libCLHEP.so
 OpNovice: CMakeFiles/OpNovice.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Linking CXX executable OpNovice"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/vagrant/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Linking CXX executable OpNovice"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/OpNovice.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -459,8 +693,17 @@ CMakeFiles/OpNovice.dir/build: OpNovice
 .PHONY : CMakeFiles/OpNovice.dir/build
 
 CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/OpNovice.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXEventAction.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXEventActionMessenger.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXParticleSource.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXParticleSourceMessenger.cc.o.requires
 CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXPmtHit.cc.o.requires
 CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXPmtSD.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXPrimaryGeneratorAction.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXRunAction.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXRunActionMessenger.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXScintHit.cc.o.requires
+CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/DMXScintSD.cc.o.requires
 CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/OpNoviceActionInitialization.cc.o.requires
 CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/OpNoviceDetectorConstruction.cc.o.requires
 CMakeFiles/OpNovice.dir/requires: CMakeFiles/OpNovice.dir/src/OpNovicePhysicsList.cc.o.requires

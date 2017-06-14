@@ -42,8 +42,7 @@
 #include "DMXScintSD.hh"
 
 #include "DMXScintHit.hh"
-//#include "DMXDetectorConstruction.hh"
-#include "OpNoviceDetectorConstruction.hh"
+#include "DMXDetectorConstruction.hh"
 
 #include "G4VPhysicalVolume.hh"
 #include "G4HCofThisEvent.hh"
