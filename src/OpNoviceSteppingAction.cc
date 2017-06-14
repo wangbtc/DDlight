@@ -28,6 +28,8 @@
 /// \file OpNoviceSteppingAction.cc
 /// \brief Implementation of the OpNoviceSteppingAction class
 
+
+#include "DMXEventAction.hh"
 #include "OpNoviceSteppingAction.hh"
 
 #include "G4Step.hh"
@@ -56,6 +58,14 @@ OpNoviceSteppingAction::~OpNoviceSteppingAction()
 
 void OpNoviceSteppingAction::UserSteppingAction(const G4Step* step)
 {
+//   if (!evtAction)
+//     evtAction =
+
+  // if (!G4UserSteppingAction)
+//     G4UserSteppingAction =
+//       dynamic_cast<const DMXEventAction*>
+//       (G4RunManager::GetRunManager()->GetUserEventAction());
+  
   G4int eventNumber = G4RunManager::GetRunManager()->
                                               GetCurrentEvent()->GetEventID();
 

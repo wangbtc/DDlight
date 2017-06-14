@@ -28,12 +28,17 @@
 /// \file OpNoviceActionInitialization.cc
 /// \brief Implementation of the OpNoviceActionInitialization class
 
+
+#include "DMXEventAction.hh"
+#include "DMXEventActionMessenger.hh"
+
 #include "OpNoviceActionInitialization.hh"
 #include "OpNovicePrimaryGeneratorAction.hh"
 #include "OpNoviceRunAction.hh"
 #include "OpNoviceSteppingAction.hh"
 #include "OpNoviceStackingAction.hh"
 #include "OpNoviceSteppingVerbose.hh"
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -59,6 +64,7 @@ void OpNoviceActionInitialization::Build() const
 {
   SetUserAction(new OpNovicePrimaryGeneratorAction());
   SetUserAction(new OpNoviceRunAction());
+  SetUserAction(new DMXEventAction());
   SetUserAction(new OpNoviceSteppingAction());
   SetUserAction(new OpNoviceStackingAction());
 }

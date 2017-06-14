@@ -32,7 +32,10 @@
 #define OpNoviceActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
+#include "DMXEventAction.hh"
+#include "DMXEventActionMessenger.hh"
 
+class DMXEventAction;
 class B4DetectorConstruction;
 
 /// Action initialization class.

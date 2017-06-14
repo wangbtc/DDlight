@@ -24,69 +24,54 @@
 // ********************************************************************
 //
 //
+// --------------------------------------------------------------
+//   GEANT 4 - Underground Dark Matter Detector Advanced Example
 //
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//      For information related to this code contact: Alex Howard
+//      e-mail: alexander.howard@cern.ch
+// --------------------------------------------------------------
+// Comments
+//
+//                  Underground Advanced
+//               by A. Howard and H. Araujo 
+//                    (27th November 2001)
+//
+// EventActionMessenger header
+// --------------------------------------------------------------
 
-#ifndef OpNoviceDetectorConstruction_h
-#define OpNoviceDetectorConstruction_h 1
+#ifndef DMXEventActionMessenger_h
+#define DMXEventActionMessenger_h 1
 
-#include "G4Material.hh"
 #include "globals.hh"
-#include "G4VUserDetectorConstruction.hh"
-#include "G4Cache.hh"
+#include "G4UImessenger.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-class DMXScintSD;
-class DMXPmtSD;
-class DMXPmtSD;
+class DMXEventAction;
+class G4UIdirectory;
+class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
+class G4UIcmdWithABool;
 
-class OpNoviceDetectorConstruction : public G4VUserDetectorConstruction
-{
+
+class DMXEventActionMessenger: public G4UImessenger {
+
   public:
-    OpNoviceDetectorConstruction();
-    virtual ~OpNoviceDetectorConstruction();
-    void ConstructSDandField();
-  
-  public:
-    virtual G4VPhysicalVolume* Construct();
-
+    DMXEventActionMessenger(DMXEventAction*);
+   ~DMXEventActionMessenger();
+    
+  void SetNewValue(G4UIcommand*, G4String);
+    
   private:
-    G4double fExpHall_x;
-    G4double fExpHall_y;
-    G4double fExpHall_z;
-
-    G4double fTank_x;
-    G4double fTank_y;
-    G4double fTank_z;
+    DMXEventAction*     eventAction;   
   
-    G4double fLXeVol_x;
-    G4double fLXeVol_y;
-    G4double fLXeVol_z;
+    G4UIdirectory*        dmxDirectory;
+    G4UIdirectory*        drawDirectory;
+    G4UIcmdWithAString*   DrawTrksCmd;
+    G4UIcmdWithAString*   DrawColsCmd;
+    G4UIcmdWithABool*     DrawHitsCmd;    
+    G4UIcmdWithABool*     SavePmtCmd;    
+    G4UIcmdWithABool*     SaveHitsCmd;    
+    G4UIcmdWithAnInteger* PrintCmd;    
 
-    G4double fBubble_x;
-    G4double fBubble_y;
-    G4double fBubble_z;
-
-  //Materials & Elements
-    G4Material* fLXe;
-
-  //Geometry
-  G4MaterialPropertiesTable* fLXe_mt;
-
-  //Volumes
-  G4LogicalVolume*   pmt_log;
-  G4VPhysicalVolume* pmt_phys;
-
-  G4LogicalVolume*   phcath_log;
-  G4VPhysicalVolume* phcath_phys;
-
-
-  //  pointer to sensitive detectors
-  G4Cache<DMXPmtSD*> pmtSD;
-  G4Cache<DMXScintSD*> LXeSD; 
 };
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-#endif /*OpNoviceDetectorConstruction_h*/
+#endif

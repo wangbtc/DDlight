@@ -37,6 +37,9 @@
 /// Stepping action class
 /// 
 
+class DMXSteppingActionMessenger;
+class DMXEventAction;
+
 class OpNoviceSteppingAction : public G4UserSteppingAction
 {
   public:

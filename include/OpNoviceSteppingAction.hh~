@@ -23,70 +23,35 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
+// $Id: OpNoviceSteppingAction.hh 69469 2013-05-05 21:42:35Z ihrivnac $
 //
-//
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+/// \file OpNoviceSteppingAction.hh
+/// \brief Definition of the OpNoviceSteppingAction class
 
-#ifndef OpNoviceDetectorConstruction_h
-#define OpNoviceDetectorConstruction_h 1
+#ifndef OpNoviceSteppingAction_h
+#define OpNoviceSteppingAction_h 1
 
-#include "G4Material.hh"
+#include "G4UserSteppingAction.hh"
 #include "globals.hh"
-#include "G4VUserDetectorConstruction.hh"
-#include "G4Cache.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-class DMXScintSD;
-class DMXPmtSD;
-class DMXPmtSD;
+/// Stepping action class
+/// 
 
-class OpNoviceDetectorConstruction : public G4VUserDetectorConstruction
+class OpNoviceSteppingAction : public G4UserSteppingAction
 {
   public:
-    OpNoviceDetectorConstruction();
-    virtual ~OpNoviceDetectorConstruction();
-    void ConstructSDandField();
-  
-  public:
-    virtual G4VPhysicalVolume* Construct();
+    OpNoviceSteppingAction();
+    virtual ~OpNoviceSteppingAction();
+
+    // method from the base class
+    virtual void UserSteppingAction(const G4Step*);
 
   private:
-    G4double fExpHall_x;
-    G4double fExpHall_y;
-    G4double fExpHall_z;
-
-    G4double fTank_x;
-    G4double fTank_y;
-    G4double fTank_z;
-  
-    G4double fLXeVol_x;
-    G4double fLXeVol_y;
-    G4double fLXeVol_z;
-
-    G4double fBubble_x;
-    G4double fBubble_y;
-    G4double fBubble_z;
-
-  //Materials & Elements
-    G4Material* fLXe;
-
-  //Geometry
-  G4MaterialPropertiesTable* fLXe_mt;
-
-  //Volumes
-  G4LogicalVolume*   pmt_log;
-  G4VPhysicalVolume* pmt_phys;
-
-  G4LogicalVolume*   phcath_log;
-  G4VPhysicalVolume* phcath_phys;
-
-
-  //  pointer to sensitive detectors
-  G4Cache<DMXPmtSD*> pmtSD;
-  G4Cache<DMXScintSD*> LXeSD; 
+    G4int fScintillationCounter;
+    G4int fCerenkovCounter;
+    G4int fEventNumber;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#endif /*OpNoviceDetectorConstruction_h*/
+#endif
