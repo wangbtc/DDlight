@@ -25,37 +25,38 @@
 //
 //
 //
-// 
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef OpNovicePrimaryGeneratorMessenger_h
-#define OpNovicePrimaryGeneratorMessenger_h 1
+#ifndef DDlightPrimaryGeneratorAction_h
+#define DDlightPrimaryGeneratorAction_h 1
 
-#include "G4UImessenger.hh"
+#include "G4VUserPrimaryGeneratorAction.hh"
 #include "globals.hh"
 
-class OpNovicePrimaryGeneratorAction;
-class G4UIdirectory;
-class G4UIcmdWithADoubleAndUnit;
+class G4ParticleGun;
+class G4Event;
+class DDlightPrimaryGeneratorMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class OpNovicePrimaryGeneratorMessenger: public G4UImessenger
+class DDlightPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
   public:
-    OpNovicePrimaryGeneratorMessenger(OpNovicePrimaryGeneratorAction* );
-    virtual ~OpNovicePrimaryGeneratorMessenger();
- 
-    virtual void SetNewValue(G4UIcommand*, G4String);
- 
+    DDlightPrimaryGeneratorAction();
+    virtual ~DDlightPrimaryGeneratorAction();
+
+  public:
+    virtual void GeneratePrimaries(G4Event*);
+
+    void SetOptPhotonPolar();
+    void SetOptPhotonPolar(G4double);
+
   private:
-    OpNovicePrimaryGeneratorAction* fOpNoviceAction;
-    G4UIdirectory*                  fGunDir;
-    G4UIcmdWithADoubleAndUnit*      fPolarCmd;
+    G4ParticleGun* fParticleGun;
+    DDlightPrimaryGeneratorMessenger* fGunMessenger;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#endif
+#endif /*DDlightPrimaryGeneratorAction_h*/

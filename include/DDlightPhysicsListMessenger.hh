@@ -23,36 +23,40 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: OpNoviceSteppingAction.hh 69469 2013-05-05 21:42:35Z ihrivnac $
 //
-/// \file OpNoviceSteppingAction.hh
-/// \brief Definition of the OpNoviceSteppingAction class
+//
+// 
 
-#ifndef OpNoviceSteppingAction_h
-#define OpNoviceSteppingAction_h 1
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "G4UserSteppingAction.hh"
+#ifndef DDlightPhysicsListMessenger_h
+#define DDlightPhysicsListMessenger_h 1
+
 #include "globals.hh"
+#include "G4UImessenger.hh"
 
-/// Stepping action class
-/// 
+class DDlightPhysicsList;
+class G4UIdirectory;
+class G4UIcmdWithAnInteger;
 
-class DMXSteppingActionMessenger;
-class DMXEventAction;
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class OpNoviceSteppingAction : public G4UserSteppingAction
+class DDlightPhysicsListMessenger: public G4UImessenger
 {
   public:
-    OpNoviceSteppingAction();
-    virtual ~OpNoviceSteppingAction();
-
-    // method from the base class
-    virtual void UserSteppingAction(const G4Step*);
-
+    DDlightPhysicsListMessenger(DDlightPhysicsList* );
+    virtual ~DDlightPhysicsListMessenger();
+ 
+    virtual void SetNewValue(G4UIcommand*, G4String);
+ 
   private:
-    G4int fScintillationCounter;
-    G4int fCerenkovCounter;
-    G4int fEventNumber;
+    DDlightPhysicsList*  fPhysicsList;
+ 
+    G4UIdirectory*        fDDlightDir;
+    G4UIdirectory*        fPhysDir;
+    G4UIcmdWithAnInteger* fVerboseCmd;
+    G4UIcmdWithAnInteger* fCerenkovCmd;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

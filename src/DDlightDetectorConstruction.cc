@@ -28,7 +28,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "OpNoviceDetectorConstruction.hh"
+#include "DDlightDetectorConstruction.hh"
 #include "DMXPmtSD.hh"
 
 #include "G4Element.hh"
@@ -47,7 +47,7 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNoviceDetectorConstruction::OpNoviceDetectorConstruction()
+DDlightDetectorConstruction::DDlightDetectorConstruction()
   : G4VUserDetectorConstruction(), fLXe_mt(NULL)
 {
   fLXe = NULL;
@@ -62,11 +62,11 @@ OpNoviceDetectorConstruction::OpNoviceDetectorConstruction()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNoviceDetectorConstruction::~OpNoviceDetectorConstruction(){;}
+DDlightDetectorConstruction::~DDlightDetectorConstruction(){;}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
+G4VPhysicalVolume* DDlightDetectorConstruction::Construct()
 {
 
 // ------------- Materials -------------
@@ -550,7 +550,7 @@ G4VPhysicalVolume* OpNoviceDetectorConstruction::Construct()
   return expHall_phys;
 }
 
-void OpNoviceDetectorConstruction::ConstructSDandField()
+void DDlightDetectorConstruction::ConstructSDandField()
 {
   // ......................................................................
   // sensitive detectors ..................................................

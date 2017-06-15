@@ -23,31 +23,34 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: OpNoviceActionInitialization.hh 68058 2013-03-13 14:47:43Z gcosmo $
 //
-/// \file OpNoviceActionInitialization.hh
-/// \brief Definition of the OpNoviceActionInitialization class
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef OpNoviceActionInitialization_h
-#define OpNoviceActionInitialization_h 1
+#ifndef DDlightStackingAction_H
+#define DDlightStackingAction_H 1
 
-#include "G4VUserActionInitialization.hh"
+#include "globals.hh"
+#include "G4UserStackingAction.hh"
 
-class B4DetectorConstruction;
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-/// Action initialization class.
-///
-
-class OpNoviceActionInitialization : public G4VUserActionInitialization
+class DDlightStackingAction : public G4UserStackingAction
 {
   public:
-    OpNoviceActionInitialization();
-    virtual ~OpNoviceActionInitialization();
+    DDlightStackingAction();
+    virtual ~DDlightStackingAction();
 
-    virtual void BuildForMaster() const;
-    virtual void Build() const;
+  public:
+    virtual G4ClassificationOfNewTrack ClassifyNewTrack(const G4Track* aTrack);
+    virtual void NewStage();
+    virtual void PrepareNewEvent();
 
-    virtual G4VSteppingVerbose* InitializeSteppingVerbose() const;
+  private:
+    G4int fScintillationCounter;
+    G4int fCerenkovCounter;
 };
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif

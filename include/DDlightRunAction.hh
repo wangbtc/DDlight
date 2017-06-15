@@ -24,70 +24,35 @@
 // ********************************************************************
 //
 //
-//
+// 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef OpNoviceDetectorConstruction_h
-#define OpNoviceDetectorConstruction_h 1
+#ifndef DDlightRunAction_h
+#define DDlightRunAction_h 1
 
-#include "G4Material.hh"
 #include "globals.hh"
-#include "G4VUserDetectorConstruction.hh"
-#include "G4Cache.hh"
+#include "G4UserRunAction.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-class DMXScintSD;
-class DMXPmtSD;
-class DMXPmtSD;
 
-class OpNoviceDetectorConstruction : public G4VUserDetectorConstruction
+class G4Timer;
+class G4Run;
+
+class DDlightRunAction : public G4UserRunAction
 {
   public:
-    OpNoviceDetectorConstruction();
-    virtual ~OpNoviceDetectorConstruction();
-    void ConstructSDandField();
-  
+    DDlightRunAction();
+    virtual ~DDlightRunAction();
+
   public:
-    virtual G4VPhysicalVolume* Construct();
+    virtual void BeginOfRunAction(const G4Run* aRun);
+    virtual void EndOfRunAction(const G4Run* aRun);
 
   private:
-    G4double fExpHall_x;
-    G4double fExpHall_y;
-    G4double fExpHall_z;
-
-    G4double fTank_x;
-    G4double fTank_y;
-    G4double fTank_z;
-  
-    G4double fLXeVol_x;
-    G4double fLXeVol_y;
-    G4double fLXeVol_z;
-
-    G4double fBubble_x;
-    G4double fBubble_y;
-    G4double fBubble_z;
-
-  //Materials & Elements
-    G4Material* fLXe;
-
-  //Geometry
-  G4MaterialPropertiesTable* fLXe_mt;
-
-  //Volumes
-  G4LogicalVolume*   pmt_log;
-  G4VPhysicalVolume* pmt_phys;
-
-  G4LogicalVolume*   phcath_log;
-  G4VPhysicalVolume* phcath_phys;
-
-
-  //  pointer to sensitive detectors
-  G4Cache<DMXPmtSD*> pmtSD;
-  G4Cache<DMXScintSD*> LXeSD; //pointer to sensitive detectors
-  G4Cache<DMXPmtSD*> pmtSD;
+    G4Timer* fTimer;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#endif /*OpNoviceDetectorConstruction_h*/
+#endif /*DDlightRunAction_h*/

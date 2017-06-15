@@ -24,61 +24,48 @@
 // ********************************************************************
 //
 //
-//
 // 
-
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "OpNovicePrimaryGeneratorMessenger.hh"
+// Make this appear first!
+#include "G4Timer.hh"
 
-#include "OpNovicePrimaryGeneratorAction.hh"
-#include "G4UIdirectory.hh"
-#include "G4UIcmdWithADoubleAndUnit.hh"
-#include "G4SystemOfUnits.hh"
+#include "DDlightRunAction.hh"
+
+#include "G4Run.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNovicePrimaryGeneratorMessenger::
-  OpNovicePrimaryGeneratorMessenger(OpNovicePrimaryGeneratorAction* OpNoviceGun)
-  : G4UImessenger(),
-    fOpNoviceAction(OpNoviceGun)
+DDlightRunAction::DDlightRunAction()
+ : G4UserRunAction(),
+   fTimer(0)
 {
-  fGunDir = new G4UIdirectory("/OpNovice/gun/");
-  fGunDir->SetGuidance("PrimaryGenerator control");
-
-  fPolarCmd =
-           new G4UIcmdWithADoubleAndUnit("/OpNovice/gun/optPhotonPolar",this);
-  fPolarCmd->SetGuidance("Set linear polarization");
-  fPolarCmd->SetGuidance("  angle w.r.t. (k,n) plane");
-  fPolarCmd->SetParameterName("angle",true);
-  fPolarCmd->SetUnitCategory("Angle");
-  fPolarCmd->SetDefaultValue(-360.0);
-  fPolarCmd->SetDefaultUnit("deg");
-  fPolarCmd->AvailableForStates(G4State_Idle);
+  fTimer = new G4Timer;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNovicePrimaryGeneratorMessenger::~OpNovicePrimaryGeneratorMessenger()
+DDlightRunAction::~DDlightRunAction()
 {
-  delete fPolarCmd;
-  delete fGunDir;
+  delete fTimer;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void OpNovicePrimaryGeneratorMessenger::SetNewValue(
-                                        G4UIcommand* command, G4String newValue)
+void DDlightRunAction::BeginOfRunAction(const G4Run* aRun)
 {
-  if( command == fPolarCmd ) {
-      G4double angle = fPolarCmd->GetNewDoubleValue(newValue);
-      if ( angle == -360.0*deg ) {
-         fOpNoviceAction->SetOptPhotonPolar();
-      } else {
-         fOpNoviceAction->SetOptPhotonPolar(angle);
-      }
-  }
+  G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
+  fTimer->Start();
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void DDlightRunAction::EndOfRunAction(const G4Run* aRun)
+{
+  fTimer->Stop();
+  G4cout << "number of event = " << aRun->GetNumberOfEvent()
+         << " " << *fTimer << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

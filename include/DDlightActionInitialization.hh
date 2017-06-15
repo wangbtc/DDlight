@@ -23,42 +23,34 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
+// $Id: DDlightActionInitialization.hh 68058 2013-03-13 14:47:43Z gcosmo $
 //
-//
-// 
+/// \file DDlightActionInitialization.hh
+/// \brief Definition of the DDlightActionInitialization class
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+#ifndef DDlightActionInitialization_h
+#define DDlightActionInitialization_h 1
 
-#ifndef OpNovicePhysicsListMessenger_h
-#define OpNovicePhysicsListMessenger_h 1
+#include "G4VUserActionInitialization.hh"
+#include "DMXEventAction.hh"
+#include "DMXEventActionMessenger.hh"
 
-#include "globals.hh"
-#include "G4UImessenger.hh"
+class DMXEventAction;
+class B4DetectorConstruction;
 
-class OpNovicePhysicsList;
-class G4UIdirectory;
-class G4UIcmdWithAnInteger;
+/// Action initialization class.
+///
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-class OpNovicePhysicsListMessenger: public G4UImessenger
+class DDlightActionInitialization : public G4VUserActionInitialization
 {
   public:
-    OpNovicePhysicsListMessenger(OpNovicePhysicsList* );
-    virtual ~OpNovicePhysicsListMessenger();
- 
-    virtual void SetNewValue(G4UIcommand*, G4String);
- 
-  private:
-    OpNovicePhysicsList*  fPhysicsList;
- 
-    G4UIdirectory*        fOpNoviceDir;
-    G4UIdirectory*        fPhysDir;
-    G4UIcmdWithAnInteger* fVerboseCmd;
-    G4UIcmdWithAnInteger* fCerenkovCmd;
-};
+    DDlightActionInitialization();
+    virtual ~DDlightActionInitialization();
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+    virtual void BuildForMaster() const;
+    virtual void Build() const;
+
+    virtual G4VSteppingVerbose* InitializeSteppingVerbose() const;
+};
 
 #endif

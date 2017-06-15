@@ -24,54 +24,32 @@
 // ********************************************************************
 //
 //
-// --------------------------------------------------------------
-//   GEANT 4 - Underground Dark Matter Detector Advanced Example
 //
-//      For information related to this code contact: Alex Howard
-//      e-mail: alexander.howard@cern.ch
-// --------------------------------------------------------------
-// Comments
 //
-//                  Underground Advanced
-//               by A. Howard and H. Araujo 
-//                    (27th November 2001)
-//
-// EventActionMessenger header
-// --------------------------------------------------------------
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef DMXEventActionMessenger_h
-#define DMXEventActionMessenger_h 1
+class DDlightSteppingVerbose;
 
-#include "globals.hh"
-#include "G4UImessenger.hh"
+#ifndef DDlightSteppingVerbose_h
+#define DDlightSteppingVerbose_h 1
 
-class DMXEventAction;
-class G4UIdirectory;
-class G4UIcmdWithAString;
-class G4UIcmdWithAnInteger;
-class G4UIcmdWithABool;
+#include "G4SteppingVerbose.hh"
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class DMXEventActionMessenger: public G4UImessenger {
+class DDlightSteppingVerbose : public G4SteppingVerbose
+{
+ public:
 
-  public:
-    DMXEventActionMessenger(DMXEventAction*);
-   ~DMXEventActionMessenger();
-    
-  void SetNewValue(G4UIcommand*, G4String);
-    
-  private:
-    DMXEventAction*     eventAction;   
-  
-    G4UIdirectory*        dmxDirectory;
-    G4UIdirectory*        drawDirectory;
-    G4UIcmdWithAString*   DrawTrksCmd;
-    G4UIcmdWithAString*   DrawColsCmd;
-    G4UIcmdWithABool*     DrawHitsCmd;    
-    G4UIcmdWithABool*     SavePmtCmd;    
-    G4UIcmdWithABool*     SaveHitsCmd;    
-    G4UIcmdWithAnInteger* PrintCmd;    
+   DDlightSteppingVerbose();
+   virtual ~DDlightSteppingVerbose();
+
+   virtual void StepInfo();
+   virtual void TrackingStarted();
 
 };
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif

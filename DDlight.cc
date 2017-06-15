@@ -48,10 +48,10 @@
 
 #include "G4UImanager.hh"
 
-#include "OpNovicePhysicsList.hh"
-#include "OpNoviceDetectorConstruction.hh"
+#include "DDlightPhysicsList.hh"
+#include "DDlightDetectorConstruction.hh"
 
-#include "OpNoviceActionInitialization.hh"
+#include "DDlightActionInitialization.hh"
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -65,7 +65,7 @@
 namespace {
   void PrintUsage() {
     G4cerr << " Usage: " << G4endl;
-    G4cerr << " OpNovice [-m macro ] [-u UIsession] [-t nThreads] [-r seed] "
+    G4cerr << " DDlight [-m macro ] [-u UIsession] [-t nThreads] [-r seed] "
            << G4endl;
     G4cerr << "   note: -t option is available only for multi-threaded mode."
            << G4endl;
@@ -124,11 +124,11 @@ int main(int argc,char** argv)
   // Set mandatory initialization classes
   //
   // Detector construction
-  runManager-> SetUserInitialization(new OpNoviceDetectorConstruction());
+  runManager-> SetUserInitialization(new DDlightDetectorConstruction());
   // Physics list
-  runManager-> SetUserInitialization(new OpNovicePhysicsList());
+  runManager-> SetUserInitialization(new DDlightPhysicsList());
   // User action initialization
-  runManager->SetUserInitialization(new OpNoviceActionInitialization());
+  runManager->SetUserInitialization(new DDlightActionInitialization());
 
   // Initialize G4 kernel
   //
@@ -159,7 +159,7 @@ int main(int argc,char** argv)
 #ifdef G4VIS_USE
       UImanager->ApplyCommand("/control/execute vis.mac");
 #else
-      UImanager->ApplyCommand("/control/execute OpNovice.in");
+      UImanager->ApplyCommand("/control/execute DDlight.in");
 #endif
       if (ui->IsGUI())
         UImanager->ApplyCommand("/control/execute gui.mac");

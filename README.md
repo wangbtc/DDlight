@@ -20,7 +20,7 @@ make -j
 
 Execute:
 ```bash
-./OpNovice
+./DDlight
 ```
 
 

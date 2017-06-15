@@ -41,7 +41,7 @@
 
 #include "DMXPmtSD.hh"
 
-#include "OpNoviceDetectorConstruction.hh"
+#include "DDlightDetectorConstruction.hh"
 
 #include "G4VPhysicalVolume.hh"
 #include "G4Step.hh"

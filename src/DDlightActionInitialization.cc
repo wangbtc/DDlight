@@ -23,81 +23,58 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: OpNoviceSteppingAction.cc 71007 2013-06-09 16:14:59Z maire $
+// $Id: DDlightActionInitialization.cc 68058 2013-03-13 14:47:43Z gcosmo $
 //
-/// \file OpNoviceSteppingAction.cc
-/// \brief Implementation of the OpNoviceSteppingAction class
+/// \file DDlightActionInitialization.cc
+/// \brief Implementation of the DDlightActionInitialization class
 
 
 #include "DMXEventAction.hh"
-#include "OpNoviceSteppingAction.hh"
+#include "DMXEventActionMessenger.hh"
 
-#include "G4Step.hh"
-#include "G4Track.hh"
-#include "G4OpticalPhoton.hh"
+#include "DDlightActionInitialization.hh"
+#include "DDlightPrimaryGeneratorAction.hh"
+#include "DDlightRunAction.hh"
+#include "DDlightSteppingAction.hh"
+#include "DDlightStackingAction.hh"
+#include "DDlightSteppingVerbose.hh"
 
-#include "G4Event.hh"
-#include "G4RunManager.hh"
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-OpNoviceSteppingAction::OpNoviceSteppingAction()
-: G4UserSteppingAction()
-{ 
-  fScintillationCounter = 0;
-  fCerenkovCounter      = 0;
-  fEventNumber = -1;
-}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNoviceSteppingAction::~OpNoviceSteppingAction()
-{ ; }
+DDlightActionInitialization::DDlightActionInitialization()
+ : G4VUserActionInitialization()
+{}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void OpNoviceSteppingAction::UserSteppingAction(const G4Step* step)
+DDlightActionInitialization::~DDlightActionInitialization()
+{}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void DDlightActionInitialization::BuildForMaster() const
 {
-//   if (!evtAction)
-//     evtAction =
-
-  // if (!G4UserSteppingAction)
-//     G4UserSteppingAction =
-//       dynamic_cast<const DMXEventAction*>
-//       (G4RunManager::GetRunManager()->GetUserEventAction());
-  
-  G4int eventNumber = G4RunManager::GetRunManager()->
-                                              GetCurrentEvent()->GetEventID();
-
-  if (eventNumber != fEventNumber) {
-     fEventNumber = eventNumber;
-     fScintillationCounter = 0;
-     fCerenkovCounter = 0;
-  }
-
-  G4Track* track = step->GetTrack();
-
-  G4String ParticleName = track->GetDynamicParticle()->
-                                 GetParticleDefinition()->GetParticleName();
-
-  if (ParticleName == "opticalphoton") return;
-
-  const std::vector<const G4Track*>* secondaries =
-                                            step->GetSecondaryInCurrentStep();
-
-  if (secondaries->size()>0) {
-     for(unsigned int i=0; i<secondaries->size(); ++i) {
-        if (secondaries->at(i)->GetParentID()>0) {
-           if(secondaries->at(i)->GetDynamicParticle()->GetParticleDefinition()
-               == G4OpticalPhoton::OpticalPhotonDefinition()){
-              if (secondaries->at(i)->GetCreatorProcess()->GetProcessName()
-               == "Scintillation")fScintillationCounter++;
-              if (secondaries->at(i)->GetCreatorProcess()->GetProcessName()
-               == "Cerenkov")fCerenkovCounter++;
-           }
-        }
-     }
-  }
+  SetUserAction(new DDlightRunAction());
 }
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+void DDlightActionInitialization::Build() const
+{
+  SetUserAction(new DDlightPrimaryGeneratorAction());
+  SetUserAction(new DDlightRunAction());
+  //  SetUserAction(new DMXEventAction()); //BP, breask the code
+  SetUserAction(new DDlightSteppingAction());
+  SetUserAction(new DDlightStackingAction());
+}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+G4VSteppingVerbose*
+               DDlightActionInitialization::InitializeSteppingVerbose() const
+{
+  return new DDlightSteppingVerbose();
+}  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

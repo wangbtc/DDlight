@@ -24,90 +24,64 @@
 // ********************************************************************
 //
 //
-//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "OpNovicePrimaryGeneratorAction.hh"
-#include "OpNovicePrimaryGeneratorMessenger.hh"
+#include "DDlightStackingAction.hh"
 
-#include "Randomize.hh"
+#include "G4VProcess.hh"
 
-#include "G4Event.hh"
-#include "G4ParticleGun.hh"
-#include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
-#include "G4SystemOfUnits.hh"
+#include "G4ParticleTypes.hh"
+#include "G4Track.hh"
+#include "G4ios.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNovicePrimaryGeneratorAction::OpNovicePrimaryGeneratorAction()
- : G4VUserPrimaryGeneratorAction(), 
-   fParticleGun(0)
+DDlightStackingAction::DDlightStackingAction()
+  : G4UserStackingAction(),
+    fScintillationCounter(0), fCerenkovCounter(0)
+{}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+DDlightStackingAction::~DDlightStackingAction()
+{}
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+G4ClassificationOfNewTrack
+DDlightStackingAction::ClassifyNewTrack(const G4Track * aTrack)
 {
-  G4int n_particle = 1;
-  fParticleGun = new G4ParticleGun(n_particle);
-
-  //create a messenger for this class
-  fGunMessenger = new OpNovicePrimaryGeneratorMessenger(this);
-
-  //default kinematic
-  //
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4ParticleDefinition* particle = particleTable->FindParticle("e+");
-
-  fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleTime(0.0*ns);
-  fParticleGun->SetParticlePosition(G4ThreeVector(0.0*cm,0.0*cm,0.0*cm));
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));
-  fParticleGun->SetParticleEnergy(500.0*keV);
+  if(aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition())
+  { // particle is optical photon
+    if(aTrack->GetParentID()>0)
+    { // particle is secondary
+      if(aTrack->GetCreatorProcess()->GetProcessName() == "Scintillation")
+        fScintillationCounter++;
+      if(aTrack->GetCreatorProcess()->GetProcessName() == "Cerenkov")
+        fCerenkovCounter++;
+    }
+  }
+  return fUrgent;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-OpNovicePrimaryGeneratorAction::~OpNovicePrimaryGeneratorAction()
+void DDlightStackingAction::NewStage()
 {
-  delete fParticleGun;
-  delete fGunMessenger;
+  G4cout << "Number of Scintillation photons produced in this event : "
+         << fScintillationCounter << G4endl;
+  G4cout << "Number of Cerenkov photons produced in this event : "
+         << fCerenkovCounter << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void OpNovicePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
+void DDlightStackingAction::PrepareNewEvent()
 {
-  fParticleGun->GeneratePrimaryVertex(anEvent);
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void OpNovicePrimaryGeneratorAction::SetOptPhotonPolar()
-{
- G4double angle = G4UniformRand() * 360.0*deg;
- SetOptPhotonPolar(angle);
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void OpNovicePrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
-{
- if (fParticleGun->GetParticleDefinition()->GetParticleName()!="opticalphoton")
-   {
-     G4cout << "--> warning from PrimaryGeneratorAction::SetOptPhotonPolar() :"
-               "the particleGun is not an opticalphoton" << G4endl;
-     return;
-   }
-
- G4ThreeVector normal (1., 0., 0.);
- G4ThreeVector kphoton = fParticleGun->GetParticleMomentumDirection();
- G4ThreeVector product = normal.cross(kphoton);
- G4double modul2       = product*product;
- 
- G4ThreeVector e_perpend (0., 0., 1.);
- if (modul2 > 0.) e_perpend = (1./std::sqrt(modul2))*product;
- G4ThreeVector e_paralle    = e_perpend.cross(kphoton);
- 
- G4ThreeVector polar = std::cos(angle)*e_paralle + std::sin(angle)*e_perpend;
- fParticleGun->SetParticlePolarization(polar);
+  fScintillationCounter = 0;
+  fCerenkovCounter = 0;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -23,34 +23,38 @@
 // * acceptance of all terms of the Geant4 Software license.          *
 // ********************************************************************
 //
-// $Id: OpNoviceActionInitialization.hh 68058 2013-03-13 14:47:43Z gcosmo $
+// $Id: DDlightSteppingAction.hh 69469 2013-05-05 21:42:35Z ihrivnac $
 //
-/// \file OpNoviceActionInitialization.hh
-/// \brief Definition of the OpNoviceActionInitialization class
+/// \file DDlightSteppingAction.hh
+/// \brief Definition of the DDlightSteppingAction class
 
-#ifndef OpNoviceActionInitialization_h
-#define OpNoviceActionInitialization_h 1
+#ifndef DDlightSteppingAction_h
+#define DDlightSteppingAction_h 1
 
-#include "G4VUserActionInitialization.hh"
-#include "DMXEventAction.hh"
-#include "DMXEventActionMessenger.hh"
+#include "G4UserSteppingAction.hh"
+#include "globals.hh"
 
+/// Stepping action class
+/// 
+
+class DMXSteppingActionMessenger;
 class DMXEventAction;
-class B4DetectorConstruction;
 
-/// Action initialization class.
-///
-
-class OpNoviceActionInitialization : public G4VUserActionInitialization
+class DDlightSteppingAction : public G4UserSteppingAction
 {
   public:
-    OpNoviceActionInitialization();
-    virtual ~OpNoviceActionInitialization();
+    DDlightSteppingAction();
+    virtual ~DDlightSteppingAction();
 
-    virtual void BuildForMaster() const;
-    virtual void Build() const;
+    // method from the base class
+    virtual void UserSteppingAction(const G4Step*);
 
-    virtual G4VSteppingVerbose* InitializeSteppingVerbose() const;
+  private:
+    G4int fScintillationCounter;
+    G4int fCerenkovCounter;
+    G4int fEventNumber;
 };
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #endif

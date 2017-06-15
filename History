@@ -5,7 +5,7 @@ $Id: History 91025 2015-06-16 09:40:08Z gcosmo $
      Geant4 - an Object-Oriented Toolkit for Simulation in HEP
      =========================================================
 
-                    Example OpNovice History file
+                    Example DDlight History file
                     -----------------------------
 This file should be used by the G4 example coordinator to briefly
 summarize all major modifications introduced in the code and keep
@@ -15,94 +15,94 @@ track of all tags.
      * Reverse chronological order (last date on top), please *
      ----------------------------------------------------------
 
-Jun 15, 2015 - P. Gumplinger (OpNovice-V10-01-04)
-- introduce G4ThreadLocal in OpNovicePhysicsList class
+Jun 15, 2015 - P. Gumplinger (DDlight-V10-01-04)
+- introduce G4ThreadLocal in DDlightPhysicsList class
 
-Jun 09, 2015 - P. Gumplinger (OpNovice-V10-01-03)
+Jun 09, 2015 - P. Gumplinger (DDlight-V10-01-03)
 - revert back to kernel initialization in main
 
-Jun 05, 2015 - P. Gumplinger (OpNovice-V10-01-02)
+Jun 05, 2015 - P. Gumplinger (DDlight-V10-01-02)
 - reduce output size and move kernel initialization to input macro
 
-May 22, 2015 - P. Gumplinger (OpNovice-V10-01-01)
+May 22, 2015 - P. Gumplinger (DDlight-V10-01-01)
 - apply coding guideline 3.3
 
-May 16, 2015 J. Allison (OpNovice-V10-01-00)
+May 16, 2015 J. Allison (DDlight-V10-01-00)
 - Replaced !G4Threading::IsWorkerThread() by G4Threading::IsMasterThread().
 
-October 27, 2014 A. Dotti (OpNovice-V10-00-06)
+October 27, 2014 A. Dotti (DDlight-V10-00-06)
 - Migration to new UI system. Requires:
   xrays-V10-00-06, op-V10-00-09, phys-ctro-em-V10-00-17
 
-July 11, 2014 P. Gumplinger (OpNovice-V10-00-05)
+July 11, 2014 P. Gumplinger (DDlight-V10-00-05)
 - Use implicit dimensioning for all arrays in
-  OpNoviceDetectorConstruction.cc and assert that they are the
+  DDlightDetectorConstruction.cc and assert that they are the
   same (thanks to M. Kelsey for suggesting this)
 
-December 23, 2013 M. Asai (OpNovice-V10-00-04)
+December 23, 2013 M. Asai (DDlight-V10-00-04)
 - Limit invokation of static method only from master/sequential.
 
-December 22, 2013 M. Asai (OpNovice-V10-00-03)
+December 22, 2013 M. Asai (DDlight-V10-00-03)
 - Avoid static G4Scintillation method invoked through a pointer.
 
-December 18, 2013 M. Asai/P. Gumplinger (OpNovice-V10-00-02)
+December 18, 2013 M. Asai/P. Gumplinger (DDlight-V10-00-02)
 - allows changes to G4Cerenkov and G4Scintillation in Idle state
 
-December 16, 2013 M. Asai (OpNovice-V10-00-01)
-- Fix race condision issue in OpNovicePhysicsList.
+December 16, 2013 M. Asai (DDlight-V10-00-01)
+- Fix race condision issue in DDlightPhysicsList.
 
-December 04, 2013 P. Gumplinger (OpNovice-V10-00-00)
+December 04, 2013 P. Gumplinger (DDlight-V10-00-00)
 - Fixes in gui.mac:
   Commented out command specific to B2 example
   Let execute vis.mac first to make the command in added menus available;
   Corrected wireframe parameter
 
-November 28, 2013 P. Gumplinger (OpNovice-V09-06-11)
+November 28, 2013 P. Gumplinger (DDlight-V09-06-11)
 - add gui.mac, icons.mac and run.png
 
-November 2, 2013 P. Gumplinger (OpNovice-V09-06-10)
+November 2, 2013 P. Gumplinger (DDlight-V09-06-10)
 - place G4Random::setTheSeed(myseed) so that it is executed for both
   sequential and MT mode
 
-October 31, 2013 P. Gumplinger (OpNovice-V09-06-09)
+October 31, 2013 P. Gumplinger (DDlight-V09-06-09)
 - to work with ctests-V09-06-19
 
-October 29, 2013 P. Gumplinger (OpNovice-V09-06-08)
+October 29, 2013 P. Gumplinger (DDlight-V09-06-08)
 - remove all reference to LXeWorkerInitialization and remove SetNumberOfThreads
 
-October 25, 2013 P. Gumplinger (OpNovice-V09-06-07)
-- Instantiate SteppingVerbose in a new method in OpNoviceActionInitialization
+October 25, 2013 P. Gumplinger (DDlight-V09-06-07)
+- Instantiate SteppingVerbose in a new method in DDlightActionInitialization
   and removed LXeWorkerInitialization (not needed anymore)
-- Add OpNoviceSteppingAction to count secondary optical photons to compare
-  with OpNoviceStackingAction
+- Add DDlightSteppingAction to count secondary optical photons to compare
+  with DDlightStackingAction
 
-11 June 2013, V.Ivanchenko (OpNovice-V09-06-06)
-- OpNovicePhysicsList - construct all particles to avoid exception
+11 June 2013, V.Ivanchenko (DDlight-V09-06-06)
+- DDlightPhysicsList - construct all particles to avoid exception
     in execution of ConstructParticle() method; removed unnecessary
     methods to construct individual particle types
 
-02 June 2013, P.Gumplinger (OpNovice-V09-06-05)
+02 June 2013, P.Gumplinger (DDlight-V09-06-05)
 - make MultiThread (MT) capable
 
-27 May 2013, I.Hrivnacova (OpNovice-V09-06-04)
+27 May 2013, I.Hrivnacova (DDlight-V09-06-04)
 - Updated .README file 
 
-27 May 2013, I.Hrivnacova (OpNovice-V09-06-03)
+27 May 2013, I.Hrivnacova (DDlight-V09-06-03)
 - Apply Examples Coding Guidelines 
   (data members/base class initialization)
 
-13 May 2013 P. Gumplinger (OpNovice-V09-06-02)
+13 May 2013 P. Gumplinger (DDlight-V09-06-02)
 - Add .README file
 
-06 May 2013 P. Gumplinger (OpNovice-V09-06-01)
+06 May 2013 P. Gumplinger (DDlight-V09-06-01)
 - Apply all Examples Coding Guidelines
 
-18 Dec 2012 I. Hrivnacova (OpNovice-V09-06-00)
+18 Dec 2012 I. Hrivnacova (DDlight-V09-06-00)
 - Fixed CMake build: removed add_custom_target(..)
 
 17 Dec 2012 P. Gumplinger 
 - move the example to /extended/optical/novice (from /novice/N06) and
-  rename N06 to OpNovice
+  rename N06 to DDlight
 
 20 June 2012 P. Gumplinger (exampleN06-V09-05-01)
 - remove SetModel from ExN06PhysicsList.cc to cowork with op-V09-05-04

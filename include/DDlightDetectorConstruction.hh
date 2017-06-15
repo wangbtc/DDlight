@@ -24,64 +24,69 @@
 // ********************************************************************
 //
 //
+//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "OpNoviceStackingAction.hh"
+#ifndef DDlightDetectorConstruction_h
+#define DDlightDetectorConstruction_h 1
 
-#include "G4VProcess.hh"
-
-#include "G4ParticleDefinition.hh"
-#include "G4ParticleTypes.hh"
-#include "G4Track.hh"
-#include "G4ios.hh"
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-OpNoviceStackingAction::OpNoviceStackingAction()
-  : G4UserStackingAction(),
-    fScintillationCounter(0), fCerenkovCounter(0)
-{}
+#include "G4Material.hh"
+#include "globals.hh"
+#include "G4VUserDetectorConstruction.hh"
+#include "G4Cache.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+class DMXScintSD;
+class DMXPmtSD;
+class DMXPmtSD;
 
-OpNoviceStackingAction::~OpNoviceStackingAction()
-{}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-G4ClassificationOfNewTrack
-OpNoviceStackingAction::ClassifyNewTrack(const G4Track * aTrack)
+class DDlightDetectorConstruction : public G4VUserDetectorConstruction
 {
-  if(aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition())
-  { // particle is optical photon
-    if(aTrack->GetParentID()>0)
-    { // particle is secondary
-      if(aTrack->GetCreatorProcess()->GetProcessName() == "Scintillation")
-        fScintillationCounter++;
-      if(aTrack->GetCreatorProcess()->GetProcessName() == "Cerenkov")
-        fCerenkovCounter++;
-    }
-  }
-  return fUrgent;
-}
+  public:
+    DDlightDetectorConstruction();
+    virtual ~DDlightDetectorConstruction();
+    void ConstructSDandField();
+  
+  public:
+    virtual G4VPhysicalVolume* Construct();
+
+  private:
+    G4double fExpHall_x;
+    G4double fExpHall_y;
+    G4double fExpHall_z;
+
+    G4double fTank_x;
+    G4double fTank_y;
+    G4double fTank_z;
+  
+    G4double fLXeVol_x;
+    G4double fLXeVol_y;
+    G4double fLXeVol_z;
+
+    G4double fBubble_x;
+    G4double fBubble_y;
+    G4double fBubble_z;
+
+  //Materials & Elements
+    G4Material* fLXe;
+
+  //Geometry
+  G4MaterialPropertiesTable* fLXe_mt;
+
+  //Volumes
+  G4LogicalVolume*   pmt_log;
+  G4VPhysicalVolume* pmt_phys;
+
+  G4LogicalVolume*   phcath_log;
+  G4VPhysicalVolume* phcath_phys;
+
+
+  //  pointer to sensitive detectors
+  G4Cache<DMXPmtSD*> pmtSD;
+  G4Cache<DMXScintSD*> LXeSD; 
+};
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void OpNoviceStackingAction::NewStage()
-{
-  G4cout << "Number of Scintillation photons produced in this event : "
-         << fScintillationCounter << G4endl;
-  G4cout << "Number of Cerenkov photons produced in this event : "
-         << fCerenkovCounter << G4endl;
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void OpNoviceStackingAction::PrepareNewEvent()
-{
-  fScintillationCounter = 0;
-  fCerenkovCounter = 0;
-}
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+#endif /*DDlightDetectorConstruction_h*/
