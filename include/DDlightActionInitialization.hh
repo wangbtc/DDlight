@@ -32,10 +32,10 @@
 #define DDlightActionInitialization_h 1
 
 #include "G4VUserActionInitialization.hh"
-#include "DMXEventAction.hh"
-#include "DMXEventActionMessenger.hh"
+#include "DDlightEventAction.hh"
+#include "DDlightEventActionMessenger.hh"
 
-class DMXEventAction;
+class DDlightEventAction;
 class B4DetectorConstruction;
 
 /// Action initialization class.

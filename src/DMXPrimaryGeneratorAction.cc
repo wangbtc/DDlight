@@ -82,7 +82,6 @@ DMXPrimaryGeneratorAction::~DMXPrimaryGeneratorAction() {
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void DMXPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
-
   energy_pri = 0.;
 
   // seeds

@@ -38,7 +38,7 @@
 /// 
 
 class DMXSteppingActionMessenger;
-class DMXEventAction;
+class DDlightEventAction;
 
 class DDlightSteppingAction : public G4UserSteppingAction
 {

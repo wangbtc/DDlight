@@ -76,6 +76,7 @@ DDlightPrimaryGeneratorAction::~DDlightPrimaryGeneratorAction()
 void DDlightPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   fParticleGun->GeneratePrimaryVertex(anEvent);
+  energy_pri = 7;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

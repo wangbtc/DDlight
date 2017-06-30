@@ -136,7 +136,8 @@ void DMXEventAction::BeginOfEventAction(const G4Event* evt)
 
   // grab energy of primary
   energy_pri = genAction->GetEnergyPrimary();
-
+  if(!energy_pri)   std::cout<<"BP primary event energy: " << energy_pri<<std::endl;
+  std::cout<<"BP primary event energy: " << energy_pri<<std::endl;
   event_id = evt->GetEventID();
  
   // print this information event by event (modulo n)  	

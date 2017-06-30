@@ -42,19 +42,23 @@ class DDlightPrimaryGeneratorMessenger;
 
 class DDlightPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 {
-  public:
-    DDlightPrimaryGeneratorAction();
-    virtual ~DDlightPrimaryGeneratorAction();
+public:
+  DDlightPrimaryGeneratorAction();
+  virtual ~DDlightPrimaryGeneratorAction();
 
-  public:
-    virtual void GeneratePrimaries(G4Event*);
+public:
+  virtual void GeneratePrimaries(G4Event*);
+  const long* GetEventSeeds() const       {return seeds;};
 
-    void SetOptPhotonPolar();
-    void SetOptPhotonPolar(G4double);
+  void SetOptPhotonPolar();
+  void SetOptPhotonPolar(G4double);
+  G4double GetEnergyPrimary() const  {return energy_pri;}; 
 
-  private:
-    G4ParticleGun* fParticleGun;
-    DDlightPrimaryGeneratorMessenger* fGunMessenger;
+private:
+  G4ParticleGun* fParticleGun;
+  DDlightPrimaryGeneratorMessenger* fGunMessenger;
+  long seeds[2];
+  G4double energy_pri;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

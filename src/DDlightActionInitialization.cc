@@ -29,8 +29,8 @@
 /// \brief Implementation of the DDlightActionInitialization class
 
 
-#include "DMXEventAction.hh"
-#include "DMXEventActionMessenger.hh"
+#include "DDlightEventAction.hh"
+#include "DDlightEventActionMessenger.hh"
 
 #include "DDlightActionInitialization.hh"
 #include "DDlightPrimaryGeneratorAction.hh"
@@ -64,7 +64,8 @@ void DDlightActionInitialization::Build() const
 {
   SetUserAction(new DDlightPrimaryGeneratorAction());
   SetUserAction(new DDlightRunAction());
-  //  SetUserAction(new DMXEventAction()); //BP, breask the code
+  //  SetUserAction(new DMXEventAction()); //BP, breaks the code
+  SetUserAction(new DDlightEventAction()); //BP, breaks the code
   SetUserAction(new DDlightSteppingAction());
   SetUserAction(new DDlightStackingAction());
 }

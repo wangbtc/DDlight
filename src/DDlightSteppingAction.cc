@@ -29,7 +29,7 @@
 /// \brief Implementation of the DDlightSteppingAction class
 
 
-#include "DMXEventAction.hh"
+#include "DDlightEventAction.hh"
 #include "DDlightSteppingAction.hh"
 
 #include "G4Step.hh"
@@ -61,6 +61,8 @@ void DDlightSteppingAction::UserSteppingAction(const G4Step* step)
 //   if (!evtAction)
 //     evtAction =
 
+
+//BP check important
   // if (!G4UserSteppingAction)
 //     G4UserSteppingAction =
 //       dynamic_cast<const DMXEventAction*>
