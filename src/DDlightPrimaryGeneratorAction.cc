@@ -31,6 +31,8 @@
 #include "DDlightPrimaryGeneratorAction.hh"
 #include "DDlightPrimaryGeneratorMessenger.hh"
 
+#include "DMXAnalysisManager.hh"
+
 #include "Randomize.hh"
 
 #include "G4Event.hh"
@@ -75,8 +77,21 @@ DDlightPrimaryGeneratorAction::~DDlightPrimaryGeneratorAction()
 
 void DDlightPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+
+  energy_pri = 0.;
+  // seeds
+  seeds[0] = *G4Random::getTheSeeds();
+  seeds[1] = *(G4Random::getTheSeeds()+1);
+  //particleGun->GeneratePrimaryVertex(anEvent);
+
+  //  energy_pri = particleGun->GetParticleEnergy();
+
   fParticleGun->GeneratePrimaryVertex(anEvent);
-  energy_pri = 7;
+  energy_pri = fParticleGun->GetParticleEnergy();
+  //  energy_pri = 7;
+  G4AnalysisManager* man = G4AnalysisManager::Instance();
+  man->FillNtupleDColumn(1,0,energy_pri);
+  man->AddNtupleRow(1);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
