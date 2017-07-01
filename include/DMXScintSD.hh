@@ -36,92 +36,40 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// ScintSD (sensitive detector) header
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#ifndef DMXScintSD_h
+#define DMXScintSD_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "G4VSensitiveDetector.hh"
+#include "globals.hh"
+#include "DMXScintHit.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+class G4Step;
+class G4HCofThisEvent;
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
-
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
-
-
-DMXPmtSD::~DMXPmtSD() {;}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
-
-
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
+class DMXScintSD : public G4VSensitiveDetector
+{
+  public:
   
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
+     DMXScintSD(G4String);
+     ~DMXScintSD();
 
+      void Initialize(G4HCofThisEvent*);
+      G4bool ProcessHits(G4Step*, G4TouchableHistory*);
+      void EndOfEvent(G4HCofThisEvent*);
+        void clear();
+        void DrawAll();
+        void PrintAll();
+  
+private:
+  
+  DMXScintHitsCollection*  scintillatorCollection;      
+  G4int HitID;
+};
 
-}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
-
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
+#endif
 

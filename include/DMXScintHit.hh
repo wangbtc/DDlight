@@ -36,92 +36,82 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// DetectorConstruction header
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#ifndef DMXScintHit_h
+#define DMXScintHit_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "G4VHit.hh"
+#include "G4THitsCollection.hh"
+#include "G4Allocator.hh"
+#include "G4ThreeVector.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
+class DMXScintHit : public G4VHit
+{
+  public:
 
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
+      DMXScintHit();
+      ~DMXScintHit();
+      DMXScintHit(const DMXScintHit&);
+      const DMXScintHit& operator=(const DMXScintHit&);
+      int operator==(const DMXScintHit&) const;
 
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
+      inline void* operator new(size_t);
+      inline void  operator delete(void*);
 
+      void Draw();
+      void Print();
 
-DMXPmtSD::~DMXPmtSD() {;}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
-
-
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
+  public:
   
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
+      void SetEdep           (G4double de)       { edep = de; };
+      void SetPos            (G4ThreeVector xyz) { pos = xyz; };
+      void SetParticle       (G4String name)     { particleName = name; };
+      void SetParticleEnergy (G4double e1)       { particleEnergy = e1; };
+      void SetTime           (G4double t2)       { time = t2; };
 
 
+      G4double GetEdep()                         { return edep; };      
+      G4ThreeVector GetPos()                     { return pos; };
+      G4String GetParticle()                     { return particleName;};
+      G4double GetParticleEnergy()               { return particleEnergy;};
+      G4double GetTime()                         { return time; };      
+
+
+  private:
+      G4double      edep;
+      G4ThreeVector pos;
+      G4double      time;
+      G4String      particleName;
+      G4double      particleEnergy;
+
+
+};
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
+
+typedef G4THitsCollection<DMXScintHit> DMXScintHitsCollection;
+
+extern G4ThreadLocal G4Allocator<DMXScintHit> *DMXScintHitAllocator;
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
+
+inline void* DMXScintHit::operator new(size_t)
+{
+  if (!DMXScintHitAllocator)
+    DMXScintHitAllocator = new G4Allocator<DMXScintHit>;
+  return (void*) DMXScintHitAllocator->MallocSingle();
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
+inline void DMXScintHit::operator delete(void* aHit)
+{
+  DMXScintHitAllocator->FreeSingle((DMXScintHit*) aHit);
+}
 
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
+#endif
 

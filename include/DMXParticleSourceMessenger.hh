@@ -36,92 +36,76 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// ParticleSourceMessenger header
 // --------------------------------------------------------------
+//////////////////////////////////////////////////////////////////////////////
+// This particle source is a shortened version of G4GeneralParticleSource by
+// C Ferguson, F Lei & P Truscott (University of Southampton / DERA), with
+// some minor modifications.
+//////////////////////////////////////////////////////////////////////////////
 
-#include "DMXPmtSD.hh"
+#ifndef DMXParticleSourceMessenger_h
+#define DMXParticleSourceMessenger_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "G4UImessenger.hh"
+#include "globals.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+class DMXParticleSource;
 
-
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
-
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
-
-
-DMXPmtSD::~DMXPmtSD() {;}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
+class G4ParticleTable;
+class G4UIcommand;
+class G4UIdirectory;
+class G4UIcmdWithoutParameter;
+class G4UIcmdWithAString;
+class G4UIcmdWithADoubleAndUnit;
+class G4UIcmdWith3Vector;
+class G4UIcmdWith3VectorAndUnit;
+class G4UIcmdWithAnInteger;
+class G4UIcmdWithADouble;
+class G4UIcmdWithABool;
+class G4UIcmdWithoutParameter;
 
 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
+class DMXParticleSourceMessenger: public G4UImessenger {
   
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
+   public:
+     DMXParticleSourceMessenger(DMXParticleSource *fPtclGun);
+     ~DMXParticleSourceMessenger();
+  
+     void SetNewValue(G4UIcommand *command, G4String newValues);
+ 
+  
+   private:
+     DMXParticleSource *fParticleGun;
+     G4ParticleTable *particleTable;
+    
+   private:
+     G4UIdirectory              *gunDirectory;
+
+     G4UIcmdWithAString         *typeCmd;
+     G4UIcmdWithAString         *shapeCmd;
+     G4UIcmdWith3VectorAndUnit  *centreCmd;
+     G4UIcmdWithADoubleAndUnit  *halfzCmd;
+     G4UIcmdWithADoubleAndUnit  *radiusCmd;
+     G4UIcmdWithAString         *confineCmd;         
+     G4UIcmdWithAString         *angtypeCmd;
+     G4UIcmdWithAString         *energytypeCmd;
+     G4UIcmdWithAnInteger       *verbosityCmd;
+     G4UIcommand                *ionCmd;
+     G4UIcmdWithAString         *particleCmd;
+     G4UIcmdWith3VectorAndUnit  *positionCmd;
+     G4UIcmdWith3Vector         *directionCmd;
+     G4UIcmdWithADoubleAndUnit  *energyCmd;
+     G4UIcmdWithoutParameter    *listCmd;
 
 
-}
+   private:
+     G4bool   fShootIon; 
+     G4int    fAtomicNumber;
+     G4int    fAtomicMass;
+     G4int    fIonCharge;
+     G4double fIonExciteEnergy;
+  
+};
 
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
-
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
-
+#endif

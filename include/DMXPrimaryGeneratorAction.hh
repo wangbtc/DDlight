@@ -36,92 +36,53 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// PrimaryGeneratorAction header
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#ifndef DMXPrimaryGeneratorMessenger_h
+#define DMXPrimaryGeneratorMessenger_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "G4VUserPrimaryGeneratorAction.hh"
+#include "globals.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+#ifdef DMXENV_GPS_USE
+class G4GeneralParticleSource;
+#else
+class DMXParticleSource;
+#endif
+class DMXAnalysisManager;
 
+class G4Event;
 
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
+class DMXPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction {
 
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
-
-
-DMXPmtSD::~DMXPmtSD() {;}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
-
-
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
+   public:
+      DMXPrimaryGeneratorAction();
+      ~DMXPrimaryGeneratorAction();
   
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
+   public:
+      void GeneratePrimaries(G4Event* anEvent);
+
+   private:
+#ifdef DMXENV_GPS_USE
+  G4GeneralParticleSource* particleGun;
+#else
+  DMXParticleSource* particleGun;
+#endif
+
+   private:
+  //      const long* seeds;
+  long seeds[2];
+  G4double energy_pri;
+
+   public:
+  const long* GetEventSeeds() const       {return seeds;};
+  G4double GetEnergyPrimary() const  {return energy_pri;}; //BP forcing it to be ok
+  //  G4double GetEnergyPrimary() const  {return 5;}; //BP forcing it to be ok
+							    //G4double GetEnergyPrimary() const  {return 5;}; //BP 
 
 
-}
+};
 
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
-
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
+#endif
 

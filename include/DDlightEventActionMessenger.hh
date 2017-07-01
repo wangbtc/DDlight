@@ -36,92 +36,42 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// EventActionMessenger header
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#ifndef DDlightEventActionMessenger_h
+#define DDlightEventActionMessenger_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "globals.hh"
+#include "G4UImessenger.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
-
-
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
-
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
+class DDlightEventAction;
+class G4UIdirectory;
+class G4UIcmdWithAString;
+class G4UIcmdWithAnInteger;
+class G4UIcmdWithABool;
 
 
-DMXPmtSD::~DMXPmtSD() {;}
+class DDlightEventActionMessenger: public G4UImessenger {
 
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
-
-
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
+  public:
+    DDlightEventActionMessenger(DDlightEventAction*);
+   ~DDlightEventActionMessenger();
+    
+  void SetNewValue(G4UIcommand*, G4String);
+    
+  private:
+    DDlightEventAction*     eventAction;   
   
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
+    G4UIdirectory*        dmxDirectory;
+    G4UIdirectory*        drawDirectory;
+    G4UIcmdWithAString*   DrawTrksCmd;
+    G4UIcmdWithAString*   DrawColsCmd;
+    G4UIcmdWithABool*     DrawHitsCmd;    
+    G4UIcmdWithABool*     SavePmtCmd;    
+    G4UIcmdWithABool*     SaveHitsCmd;    
+    G4UIcmdWithAnInteger* PrintCmd;    
 
+};
 
-}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
-
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
-
+#endif

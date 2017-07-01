@@ -36,92 +36,36 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// RunActionMessenger header
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#ifndef DMXRunActionMessenger_h
+#define DMXRunActionMessenger_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "globals.hh"
+#include "G4UImessenger.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+class DMXRunAction;
+class G4UIcmdWithAString;
+class G4UIcmdWithABool;
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
+class DMXRunActionMessenger: public G4UImessenger
+{
+  public:
+    DMXRunActionMessenger(DMXRunAction*);
+   ~DMXRunActionMessenger();
+    
+    void SetNewValue(G4UIcommand*, G4String);
+    
+  private:
+    DMXRunAction*   DMXRun;
 
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
+    G4UIcmdWithAString*   SaveHitsCmd;
+    G4UIcmdWithAString*   SavePmtCmd;
+    G4UIcmdWithAString*   SaveHistFileCmd;
+};
 
-
-DMXPmtSD::~DMXPmtSD() {;}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
-
-
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
-  
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
-
-
-}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
-
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
+#endif
 

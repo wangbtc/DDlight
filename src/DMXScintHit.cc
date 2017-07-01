@@ -36,92 +36,78 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// ScintHit (scintillator sensitive detector definition) program
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#include "DMXScintHit.hh"
+#include "G4UnitsTable.hh"
+#include "G4VVisManager.hh"
+#include "G4Circle.hh"
+#include "G4Colour.hh"
+#include "G4VisAttributes.hh"
+#include <iomanip>
 
-#include "DDlightDetectorConstruction.hh"
+G4ThreadLocal G4Allocator<DMXScintHit> *DMXScintHitAllocator;
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
-
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
+DMXScintHit::DMXScintHit()
+{
+  edep=0.;
+  pos = G4ThreeVector(0., 0., 0.);
+  time = 0.;
+  particleEnergy = 0.;
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-DMXPmtSD::~DMXPmtSD() {;}
+DMXScintHit::~DMXScintHit()
+{;}
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
-
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
-
-  HitID = -1;
-
-
+DMXScintHit::DMXScintHit(const DMXScintHit& right)
+  : G4VHit(right)
+{
+  edep      = right.edep;
+  pos       = right.pos;
+  time           = right.time;
+  particleName   = right.particleName;
+  particleEnergy = right.particleEnergy;
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
+const DMXScintHit& DMXScintHit::operator=(const DMXScintHit& right)
+{
+  edep      = right.edep;
+  pos       = right.pos;
+  time            = right.time;
+  particleName    = right.particleName;
+  particleEnergy  = right.particleEnergy;
+  return *this;
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
-  
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
-
-
+int DMXScintHit::operator==(const DMXScintHit& right) const
+{
+  return (this==&right) ? 1 : 0;
 }
 
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
+void DMXScintHit::Draw()
+{;}
 
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
+void DMXScintHit::Print()
+{
 
-void DMXPmtSD::DrawAll()  {;}
+  G4cout << "      LXe hit ENERGY: " << std::setw(5) << G4BestUnit(edep,"Energy") 
+	 << ", at " << G4BestUnit(pos,"Length") << G4endl;
+}
 
-
-void DMXPmtSD::PrintAll() {;}
-
-
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 

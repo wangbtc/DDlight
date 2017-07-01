@@ -36,92 +36,50 @@
 //               by A. Howard and H. Araujo 
 //                    (27th November 2001)
 //
-// PmtSD (sensitive PMT) program
+// RunAction header
 // --------------------------------------------------------------
 
-#include "DMXPmtSD.hh"
+#ifndef DMXRunAction_h
+#define DMXRunAction_h 1
 
-#include "DDlightDetectorConstruction.hh"
+#include "G4UserRunAction.hh"
+#include "globals.hh"
 
-#include "G4VPhysicalVolume.hh"
-#include "G4Step.hh"
-#include "G4VTouchable.hh"
-#include "G4TouchableHistory.hh"
-#include "G4SDManager.hh"
-#include "G4UImanager.hh"
-#include "G4ios.hh"
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
+class DMXRunActionMessenger;
+class G4Run;
+class DMXAnalysisManager;
 
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
+class DMXRunAction : public G4UserRunAction
+{
+  public:
+    DMXRunAction();
+   ~DMXRunAction();
 
-  G4String HCname="pmtCollection";
-  collectionName.insert(HCname);
-}
+  public:
+    void BeginOfRunAction(const G4Run*);
+    void EndOfRunAction(const G4Run*);
 
+  public:
+    void SetsavehitsFile   (G4String val)        { savehitsFile   = val;};
+    void SetsavepmtFile    (G4String val)        { savepmtFile    = val;};
+    void SetsavehistFile   (G4String val)        { savehistFile   = val;};
 
-DMXPmtSD::~DMXPmtSD() {;}
+    G4String GetsavehitsFile()  const     {return savehitsFile;};
+    G4String GetsavepmtFile()  const      {return savepmtFile;};
 
+  private:
+    void Book();
 
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
+  //messenger
+    G4String savehitsFile;
+    G4String savepmtFile;
+    G4String savehistFile;
 
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
+  DMXRunActionMessenger* runMessenger;
 
-  HitID = -1;
+};
 
-
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
-
-  // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
-  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
-  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
-  HitID = pmtCollection->insert(aPmtHit);
-
-  return true;
- 
-}
-
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
-
-  G4String HCname = collectionName[0];
-
-  static G4int HCID = -1;
-  if(HCID<0)
-    HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
-  
-  G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
-    G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
-      pmtCollection->PrintAllHits();
-  }
-
-
-}
-
-
-////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
-
-
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
+#endif
 
