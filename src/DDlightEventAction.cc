@@ -169,12 +169,14 @@ void DDlightEventAction::BeginOfEventAction(const G4Event* evt)
 void DDlightEventAction::EndOfEventAction(const G4Event* evt) {
 
   // check that both hits collections have been defined
-  if(scintillatorCollID<0||pmtCollID<0) return;
-
+  
   G4AnalysisManager* man = G4AnalysisManager::Instance();
-  std::cout << "DEBUG: DDlightEventAction::EndOfEventAction" << std::endl;
+  
 
   man->FillNtupleDColumn(4,0,42);
+  man->FillH1(13, 42);
+
+  if(scintillatorCollID<0||pmtCollID<0) return;
   // address hits collections
   DMXScintHitsCollection* SHC = NULL;
   DMXPmtHitsCollection*   PHC = NULL;

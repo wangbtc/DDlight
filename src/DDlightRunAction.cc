@@ -131,6 +131,7 @@ void DDlightRunAction::Book()
   man->CreateH1("h10","Electron Ener Deposit/keV",1000,0.,1000.);
   man->CreateH1("h11","Positron Ener Deposit/keV",1000,0.,1000.);
   man->CreateH1("h12","Other Ener Deposit/keV", 1000,0.,1000.);
+  man->CreateH1("test","Testing", 100,0.,100.);
 
   //Creating 2-dimensional histograms
   man->CreateH2("hh1","PMT Hit Pattern", 
