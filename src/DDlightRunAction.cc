@@ -58,10 +58,6 @@ DDlightRunAction::~DDlightRunAction()
 
 void DDlightRunAction::BeginOfRunAction(const G4Run* aRun)
 {
-  // G4AnalysisManager* man = G4AnalysisManager::Instance();
-  // man->OpenFile(fOutputFile);
-  // man->SetFirstHistoId(1);
-  // man->SetFirstNtupleId(1);
   G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
   fTimer->Start();
 
@@ -114,6 +110,12 @@ void DDlightRunAction::Book()
   man->CreateNtupleDColumn("xpos");
   man->CreateNtupleDColumn("ypos");
   man->CreateNtupleDColumn("zpos");
+  man->FinishNtuple();
+
+  // test ntuple
+  //id=4
+  man->CreateNtuple("testing", "Just for testing");
+  man->CreateNtupleDColumn("test1");
   man->FinishNtuple();
  
   // Creating 1-dimensional histograms

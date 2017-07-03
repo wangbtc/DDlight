@@ -119,7 +119,7 @@ DDlightEventAction::~DDlightEventAction() {
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 void DDlightEventAction::BeginOfEventAction(const G4Event* evt) 
 {
-
+  std::cout << "DEBUG: DDlightEventAction::BeginOfEventAction" << std::endl;
   //thread-local run action
   if (!runAct) 
     runAct = 
@@ -172,7 +172,9 @@ void DDlightEventAction::EndOfEventAction(const G4Event* evt) {
   if(scintillatorCollID<0||pmtCollID<0) return;
 
   G4AnalysisManager* man = G4AnalysisManager::Instance();
+  std::cout << "DEBUG: DDlightEventAction::EndOfEventAction" << std::endl;
 
+  man->FillNtupleDColumn(4,0,42);
   // address hits collections
   DMXScintHitsCollection* SHC = NULL;
   DMXPmtHitsCollection*   PHC = NULL;
