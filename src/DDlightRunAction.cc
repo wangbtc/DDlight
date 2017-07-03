@@ -31,6 +31,8 @@
 // Make this appear first!
 #include "G4Timer.hh"
 
+#include "DMXAnalysisManager.hh"
+
 #include "DDlightRunAction.hh"
 
 #include "G4Run.hh"
@@ -39,7 +41,8 @@
 
 DDlightRunAction::DDlightRunAction()
  : G4UserRunAction(),
-   fTimer(0)
+   fTimer(0),
+   fOutputFile("test.root")
 {
   fTimer = new G4Timer;
 }
@@ -55,14 +58,95 @@ DDlightRunAction::~DDlightRunAction()
 
 void DDlightRunAction::BeginOfRunAction(const G4Run* aRun)
 {
+  // G4AnalysisManager* man = G4AnalysisManager::Instance();
+  // man->OpenFile(fOutputFile);
+  // man->SetFirstHistoId(1);
+  // man->SetFirstNtupleId(1);
   G4cout << "### Run " << aRun->GetRunID() << " start." << G4endl;
   fTimer->Start();
+
+  Book();
+}
+
+void DDlightRunAction::Book()
+{  
+  // Get/create analysis manager
+  G4AnalysisManager* man = G4AnalysisManager::Instance();
+  
+  // Open an output file
+  man->OpenFile(fOutputFile);
+  man->SetFirstHistoId(1);
+  man->SetFirstNtupleId(1);
+
+
+  // ---- primary ntuple ------
+  // id==1
+  man->CreateNtuple("tree1", "Particle Source Energy");
+  man->CreateNtupleDColumn("energy");
+  man->FinishNtuple();
+
+  // ---- secondary ntuple ------   
+  //id==2
+  man->CreateNtuple("tree2", "Scintillation Hits Info");
+  man->CreateNtupleDColumn("Event");
+  man->CreateNtupleDColumn("e_prim");
+  man->CreateNtupleDColumn("tot_e");
+  man->CreateNtupleDColumn("s_hits");
+  man->CreateNtupleDColumn("xe_time");
+  man->CreateNtupleDColumn("num_ph");
+  man->CreateNtupleDColumn("avphtime");
+  man->CreateNtupleDColumn("firstpart");
+  man->CreateNtupleDColumn("firstparte");
+  man->CreateNtupleDColumn("gamma");
+  man->CreateNtupleDColumn("neutron");
+  man->CreateNtupleDColumn("posi");
+  man->CreateNtupleDColumn("elec");
+  man->CreateNtupleDColumn("other");
+  man->CreateNtupleDColumn("seed1");
+  man->CreateNtupleDColumn("seed2");
+  man->FinishNtuple();
+
+  // ---- tertiary ntuple ------   
+  //id==3
+  man->CreateNtuple("tree3", "PMT Hits Info");
+  man->CreateNtupleDColumn("event");
+  man->CreateNtupleDColumn("hits");
+  man->CreateNtupleDColumn("xpos");
+  man->CreateNtupleDColumn("ypos");
+  man->CreateNtupleDColumn("zpos");
+  man->FinishNtuple();
+ 
+  // Creating 1-dimensional histograms
+  man->CreateH1("h1","Source Energy /keV",  1000,0.,10000.);
+  man->CreateH1("h2","Energy Deposit /keV", 1000,0.,1000.);
+  man->CreateH1("h3","Nuclear Recoil Edep /keV", 100,0.,100.);
+  man->CreateH1("h4","Number of Photons - LowE", 200,0.,200.);
+  man->CreateH1("h5","Number of Photons - HighE", 100,0.,10000.);
+  man->CreateH1("h6","Average Photon Arrival/ns", 200,0.,200.);
+  man->CreateH1("h7","1st event Photon Arrival", 200,0.,200.);
+  man->CreateH1("h8","Gamma Energy Deposit/keV", 1000,0.,1000.);
+  man->CreateH1("h9","Neutron Ener Deposit/keV", 1000,0.,1000.);
+  man->CreateH1("h10","Electron Ener Deposit/keV",1000,0.,1000.);
+  man->CreateH1("h11","Positron Ener Deposit/keV",1000,0.,1000.);
+  man->CreateH1("h12","Other Ener Deposit/keV", 1000,0.,1000.);
+
+  //Creating 2-dimensional histograms
+  man->CreateH2("hh1","PMT Hit Pattern", 
+		300 ,-30.,30.,300,-30.,30.);
+  man->CreateH2("hh2","1st event PMT Hit Pattern", 
+		300 ,-30.,30.,300,-30.,30.);
+
+  return;
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void DDlightRunAction::EndOfRunAction(const G4Run* aRun)
 {
+  auto man = G4AnalysisManager::Instance();
+  man->Write();
+  man->CloseFile();
   fTimer->Stop();
   G4cout << "number of event = " << aRun->GetNumberOfEvent()
          << " " << *fTimer << G4endl;
