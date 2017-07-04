@@ -61,6 +61,7 @@ class DMXPmtSD : public G4VSensitiveDetector {
   
      void Initialize(G4HCofThisEvent*);
      G4bool ProcessHits(G4Step*,G4TouchableHistory*);
+     G4bool ProcessHits_constStep(const G4Step*,G4TouchableHistory*);
      void EndOfEvent(G4HCofThisEvent*);
      void clear();
      void DrawAll();

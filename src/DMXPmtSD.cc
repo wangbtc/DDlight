@@ -64,6 +64,7 @@ DMXPmtSD::~DMXPmtSD() { ; }
 ////////////////////////////////////////////////////////////////////////////
 void DMXPmtSD::Initialize(G4HCofThisEvent *)
 {
+  std::cout << "[DEBUG] PMT::Initialize" << std::endl;
 
   pmtCollection = new DMXPmtHitsCollection(SensitiveDetectorName, collectionName[0]);
 
@@ -73,7 +74,18 @@ void DMXPmtSD::Initialize(G4HCofThisEvent *)
 ////////////////////////////////////////////////////////////////////////////
 G4bool DMXPmtSD::ProcessHits(G4Step *aStep, G4TouchableHistory *)
 {
+  std::cout << "[DEBUG] PMT::ProcessHits" << std::endl;
+  // make known hit position
+  DMXPmtHit *aPmtHit = new DMXPmtHit();
+  aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
+  aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
+  HitID = pmtCollection->insert(aPmtHit);
 
+  return true;
+}
+
+G4bool DMXPmtSD::ProcessHits_constStep(const G4Step* aStep,G4TouchableHistory*){
+  std::cout << "[DEBUG] PMT::ProcessHits_constStep" << std::endl;
   // make known hit position
   DMXPmtHit *aPmtHit = new DMXPmtHit();
   aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());

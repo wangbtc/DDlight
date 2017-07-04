@@ -28,7 +28,7 @@
 /// \file DDlightSteppingAction.cc
 /// \brief Implementation of the DDlightSteppingAction class
 
-
+#include "DMXPmtSD.hh"
 #include "DDlightEventAction.hh"
 #include "DDlightSteppingAction.hh"
 
@@ -38,67 +38,78 @@
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
+#include "G4SDManager.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 DDlightSteppingAction::DDlightSteppingAction()
-: G4UserSteppingAction()
-{ 
+    : G4UserSteppingAction()
+{
   fScintillationCounter = 0;
-  fCerenkovCounter      = 0;
+  fCerenkovCounter = 0;
   fEventNumber = -1;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 DDlightSteppingAction::~DDlightSteppingAction()
-{ ; }
+{
+  ;
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void DDlightSteppingAction::UserSteppingAction(const G4Step* step)
+void DDlightSteppingAction::UserSteppingAction(const G4Step *step)
 {
-//   if (!evtAction)
-//     evtAction =
+  //   if (!evtAction)
+  //     evtAction =
 
-
-//BP check important
+  //BP check important
   // if (!G4UserSteppingAction)
-//     G4UserSteppingAction =
-//       dynamic_cast<const DMXEventAction*>
-//       (G4RunManager::GetRunManager()->GetUserEventAction());
-  
-  G4int eventNumber = G4RunManager::GetRunManager()->
-                                              GetCurrentEvent()->GetEventID();
+  //     G4UserSteppingAction =
+  //       dynamic_cast<const DMXEventAction*>
+  //       (G4RunManager::GetRunManager()->GetUserEventAction());
 
-  if (eventNumber != fEventNumber) {
-     fEventNumber = eventNumber;
-     fScintillationCounter = 0;
-     fCerenkovCounter = 0;
+  G4SDManager *SDman = G4SDManager::GetSDMpointer();
+  G4String sdName = "/DMXDet/pmtSD";
+  DMXPmtSD *pmtSD = (DMXPmtSD *)SDman->FindSensitiveDetector(sdName);
+  if (pmtSD)
+    pmtSD->ProcessHits_constStep(step, NULL);
+
+  G4int eventNumber = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+
+  if (eventNumber != fEventNumber)
+  {
+    fEventNumber = eventNumber;
+    fScintillationCounter = 0;
+    fCerenkovCounter = 0;
   }
 
-  G4Track* track = step->GetTrack();
+  G4Track *track = step->GetTrack();
 
-  G4String ParticleName = track->GetDynamicParticle()->
-                                 GetParticleDefinition()->GetParticleName();
+  G4String ParticleName = track->GetDynamicParticle()->GetParticleDefinition()->GetParticleName();
 
-  if (ParticleName == "opticalphoton") return;
+  if (ParticleName == "opticalphoton")
+    return;
 
-  const std::vector<const G4Track*>* secondaries =
-                                            step->GetSecondaryInCurrentStep();
+  const std::vector<const G4Track *> *secondaries =
+      step->GetSecondaryInCurrentStep();
 
-  if (secondaries->size()>0) {
-     for(unsigned int i=0; i<secondaries->size(); ++i) {
-        if (secondaries->at(i)->GetParentID()>0) {
-           if(secondaries->at(i)->GetDynamicParticle()->GetParticleDefinition()
-               == G4OpticalPhoton::OpticalPhotonDefinition()){
-              if (secondaries->at(i)->GetCreatorProcess()->GetProcessName()
-               == "Scintillation")fScintillationCounter++;
-              if (secondaries->at(i)->GetCreatorProcess()->GetProcessName()
-               == "Cerenkov")fCerenkovCounter++;
-           }
+  if (secondaries->size() > 0)
+  {
+    for (unsigned int i = 0; i < secondaries->size(); ++i)
+    {
+      if (secondaries->at(i)->GetParentID() > 0)
+      {
+        if (secondaries->at(i)->GetDynamicParticle()->GetParticleDefinition() == G4OpticalPhoton::OpticalPhotonDefinition())
+        {
+          if (secondaries->at(i)->GetCreatorProcess()->GetProcessName() == "Scintillation")
+            fScintillationCounter++;
+          if (secondaries->at(i)->GetCreatorProcess()->GetProcessName() == "Cerenkov")
+            fCerenkovCounter++;
         }
-     }
+      }
+    }
   }
 }
 
