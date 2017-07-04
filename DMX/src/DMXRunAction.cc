@@ -83,7 +83,7 @@ void DMXRunAction::BeginOfRunAction(const G4Run* aRun)
     G4cout << "### Run " << aRun->GetRunID() << " starts (worker)." << G4endl;
   
   // Book histograms and ntuples
-  Book();
+  // Book();
 
 }
 

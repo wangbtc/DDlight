@@ -48,9 +48,11 @@ class DDlightRunAction : public G4UserRunAction
   public:
     virtual void BeginOfRunAction(const G4Run* aRun);
     virtual void EndOfRunAction(const G4Run* aRun);
+    void Book();
 
   private:
     G4Timer* fTimer;
+    std::string fOutputFile;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
