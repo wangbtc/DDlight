@@ -11,4 +11,4 @@
 /gun/position 30 40 50 cm
 /gun/direction 1 1 1
 /DDlight/gun/optPhotonPolar
-/run/beamOn 1
+/run/beamOn 10

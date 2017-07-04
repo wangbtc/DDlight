@@ -390,7 +390,7 @@ G4VPhysicalVolume* DDlightDetectorConstruction::Construct()
   //  G4double pmtHeight    = 12.0*cm;
   //  G4double pmtRadius    = 2.6*cm;
   G4double pmtHeight    = 20.0*cm;
-  G4double pmtRadius    = 50*cm;
+  G4double pmtRadius    = 500*cm;
   G4double pmtVOffset   = 1.0*cm;
   G4double pmtVPosition = -5*m;//-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
 

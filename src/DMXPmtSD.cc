@@ -33,7 +33,7 @@
 // Comments
 //
 //                  Underground Advanced
-//               by A. Howard and H. Araujo 
+//               by A. Howard and H. Araujo
 //                    (27th November 2001)
 //
 // PmtSD (sensitive PMT) program
@@ -51,77 +51,61 @@
 #include "G4UImanager.hh"
 #include "G4ios.hh"
 
+DMXPmtSD::DMXPmtSD(G4String name)
+    : G4VSensitiveDetector(name)
+{
 
-DMXPmtSD::DMXPmtSD(G4String name) 
-  :G4VSensitiveDetector(name) {
-
-  G4String HCname="pmtCollection";
+  G4String HCname = "pmtCollection";
   collectionName.insert(HCname);
 }
 
-
-DMXPmtSD::~DMXPmtSD() {;}
-
+DMXPmtSD::~DMXPmtSD() { ; }
 
 ////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::Initialize(G4HCofThisEvent*) {
+void DMXPmtSD::Initialize(G4HCofThisEvent *)
+{
 
-  pmtCollection = new DMXPmtHitsCollection
-    (SensitiveDetectorName,collectionName[0]); 
+  pmtCollection = new DMXPmtHitsCollection(SensitiveDetectorName, collectionName[0]);
 
   HitID = -1;
-
-
 }
 
-
-
 ////////////////////////////////////////////////////////////////////////////
-G4bool DMXPmtSD::ProcessHits
-  (G4Step* aStep, G4TouchableHistory*){
+G4bool DMXPmtSD::ProcessHits(G4Step *aStep, G4TouchableHistory *)
+{
 
   // make known hit position
-  DMXPmtHit* aPmtHit = new DMXPmtHit();
+  DMXPmtHit *aPmtHit = new DMXPmtHit();
   aPmtHit->SetPos(aStep->GetPostStepPoint()->GetPosition());
   aPmtHit->SetTime(aStep->GetPostStepPoint()->GetGlobalTime());
   HitID = pmtCollection->insert(aPmtHit);
 
   return true;
- 
 }
 
-
-
 ////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::EndOfEvent(G4HCofThisEvent* HCE) {
+void DMXPmtSD::EndOfEvent(G4HCofThisEvent *HCE)
+{
 
   G4String HCname = collectionName[0];
 
   static G4int HCID = -1;
-  if(HCID<0)
+  if (HCID < 0)
     HCID = G4SDManager::GetSDMpointer()->GetCollectionID(HCname);
-  HCE->AddHitsCollection(HCID,pmtCollection);
-  
+  HCE->AddHitsCollection(HCID, pmtCollection);
+
   G4int nHits = pmtCollection->entries();
-  if (verboseLevel>=1) {
+  if (verboseLevel >= 1)
+  {
     G4cout << "     PMT collection: " << nHits << " hits" << G4endl;
-    if (verboseLevel>=2)
+    if (verboseLevel >= 2)
       pmtCollection->PrintAllHits();
   }
-
-
 }
 
-
 ////////////////////////////////////////////////////////////////////////////
-void DMXPmtSD::clear()    {;}
+void DMXPmtSD::clear() { ; }
 
+void DMXPmtSD::DrawAll() { ; }
 
-void DMXPmtSD::DrawAll()  {;}
-
-
-void DMXPmtSD::PrintAll() {;}
-
-
-
-
+void DMXPmtSD::PrintAll() { ; }
