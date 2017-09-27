@@ -50,3 +50,6 @@ cd /vagrant
 ```
 
 Now follow the instructions above for initialising the development environment, compile and execute the code. Other useful commands after work is done is ```vagrant suspend``` and ```vagrand halt```.
+
+
+== hello ==
