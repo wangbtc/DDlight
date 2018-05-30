@@ -53,8 +53,10 @@ DDlightDetectorConstruction::DDlightDetectorConstruction()
   fLXe = NULL;
   fExpHall_x = fExpHall_y = fExpHall_z = 10.0 * m;
   fTank_x = fTank_y = fTank_z = 5.0 * m;
-  fLXeVol_x = fLXeVol_y = fLXeVol_z = 1.0 * m;
-  fBubble_x = fBubble_y = fBubble_z = 0.5 * m;
+  fBox_x = fBox_y = fBox_z = 0.0 * mm;
+  fBottle_x = fBottle_y = fBottle_z = 0.0 * mm;
+  //fLXeVol_x = fLXeVol_y = fLXeVol_z = 1.0 * m;
+  //fBubble_x = fBubble_y = fBubble_z = 0.5 * m;
 
   //Zero the G4Cache objects to contain logical volumes
   pmtSD.Put(0);
@@ -117,6 +119,9 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   fLXe_mt->AddConstProperty("SLOWTIMECONSTANT", 45. * ns);
   fLXe_mt->AddConstProperty("YIELDRATIO", 1.0);
   fLXe->SetMaterialPropertiesTable(fLXe_mt);
+  // Set up properties of LAB
+
+
 
   // making quart
   G4Element *Si = new G4Element("Silicon", "Si", z = 14., a = 28.09 * g / mole);
@@ -131,13 +136,23 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   quartz_mt->AddProperty("ABSLENGTH", quartz_PP, quartz_ABSL, 3);
   quartz->SetMaterialPropertiesTable(quartz_mt);
 
+  //Glass
+  G4Material* Glass = new G4Material("Glass", density=1.032*g/cm3,2);
+  Glass->AddElement(C,91.533*perCent);
+  Glass->AddElement(H,8.467*perCent);
+
+  //Teflon
+  G4Material* Teflon = new G4Material("Teflon", density=2.2*g/cm3,2);
+  Teflon->AddElement(C,natoms=2);
+  Teflon->AddElement(F,natoms=4);
+
   // Set the Birks Constant for the LXe scintillator
 
-  fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
-  if (fLXe_mt)
-    fLXe_mt->AddConstProperty("SCINTILLATIONYIELD", 12000. / MeV);
+  //fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
+  //if (fLXe_mt)
+    //fLXe_mt->AddConstProperty("SCINTILLATIONYIELD", 12000. / MeV);
 
-  G4double photonEnergy[] =
+  /*G4double photonEnergy[] =
       {2.034 * eV, 2.068 * eV, 2.103 * eV, 2.139 * eV,
        2.177 * eV, 2.216 * eV, 2.256 * eV, 2.298 * eV,
        2.341 * eV, 2.386 * eV, 2.433 * eV, 2.481 * eV,
@@ -147,7 +162,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
        3.353 * eV, 3.446 * eV, 3.545 * eV, 3.649 * eV,
        3.760 * eV, 3.877 * eV, 4.002 * eV, 4.136 * eV};
 
-  const G4int nEntries = sizeof(photonEnergy) / sizeof(G4double);
+  const G4int nEntries = sizeof(photonEnergy) / sizeof(G4double);*/
 
   //
   // Water
@@ -301,7 +316,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4MaterialPropertiesTable *myMPT3 = new G4MaterialPropertiesTable();
   myMPT3->AddProperty("RINDEX", photonEnergy, refractiveIndex3, nEntries);
 
-  G4cout << "LXe G4MaterialPropertiesTable" << G4endl;
+  //G4cout << "LXe G4MaterialPropertiesTable" << G4endl;
   myMPT3->DumpTable();
 
   fLXe->SetMaterialPropertiesTable(myMPT3);
@@ -398,9 +413,11 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
 
   pmt_log = new G4LogicalVolume(pmt_sol, quartz, "pmt_log", 0, 0, 0);
   pmt_phys = new G4PVPlacement(0, G4ThreeVector(0. * cm, 0. * cm, pmtVPosition), "pmt_phys", pmt_log, LXeVol_phys, false, 0);
+  pmt_phys_reflect = new G4PVPlacement(0, G4ThreeVector(0. * cm, 0. * cm, -pmtVPosition), "pmt_phys_reflect", pmt_log, LXeVol_phys, false, 0);
 
   G4OpticalSurface *pmt_opsurf = new G4OpticalSurface("pmt_opsurf", unified, polished, dielectric_dielectric);
   G4LogicalBorderSurface *pmt_surf = new G4LogicalBorderSurface("pmt_surf", LXeVol_phys, pmt_phys, pmt_opsurf);
+  G4LogicalBorderSurface *pmt_surf_reflect = new G4LogicalBorderSurface("pmt_surf_reflect", LXeVol_phys, pmt_phys_reflect, pmt_opsurf);
   G4VisAttributes vis_attr;
   vis_attr.SetColour(1.0, 0.0, 1.0);
   vis_attr.SetForceSolid(true);
@@ -431,10 +448,12 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   //bp now continue with building photo cathode
   phcath_log = new G4LogicalVolume(phcath_sol, cathmetalAl, "phcath_log");
   phcath_phys = new G4PVPlacement(0, G4ThreeVector(0., 0., phcathVPosition), "phcath_phys", phcath_log, pmt_phys, false, 0);
+  phcath_phys_reflect = new G4PVPlacement(0, G4ThreeVector(0., 0., phcathVPosition), "phcath_phys_reflect", phcath_log, pmt_phys_reflect, false, 0);
 
   //now its surface
   G4OpticalSurface *phcath_opsurf = new G4OpticalSurface("phcath_opsurf", unified, polished, dielectric_dielectric);
   new G4LogicalBorderSurface("phcath_surf", pmt_phys, phcath_phys, phcath_opsurf);
+  new G4LogicalBorderSurface("phcath_surf_reflect", pmt_phys_reflect, phcath_phys_reflect, phcath_opsurf);
 
   G4double phcath_PP[2] = {6.00 * eV, 7.50 * eV};
   // G4double phcath_REFL[2] = { 0.0, 0.0};
