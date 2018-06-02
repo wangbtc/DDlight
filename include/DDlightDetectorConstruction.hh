@@ -47,7 +47,7 @@ class DDlightDetectorConstruction : public G4VUserDetectorConstruction
     DDlightDetectorConstruction();
     virtual ~DDlightDetectorConstruction();
     void ConstructSDandField();
-  
+
   public:
     virtual G4VPhysicalVolume* Construct();
 
@@ -59,7 +59,11 @@ class DDlightDetectorConstruction : public G4VUserDetectorConstruction
     G4double fTank_x;
     G4double fTank_y;
     G4double fTank_z;
-  
+
+    G4double fBox_x;
+    G4double fBox_y;
+    G4double fBox_z;
+
     G4double fLXeVol_x;
     G4double fLXeVol_y;
     G4double fLXeVol_z;
@@ -67,6 +71,10 @@ class DDlightDetectorConstruction : public G4VUserDetectorConstruction
     G4double fBubble_x;
     G4double fBubble_y;
     G4double fBubble_z;
+
+    G4double fBottle_Rmin;
+    G4double fBottle_Rmax;
+    G4double fBottle_Z;
 
   //Materials & Elements
     G4Material* fLXe;
@@ -77,14 +85,16 @@ class DDlightDetectorConstruction : public G4VUserDetectorConstruction
   //Volumes
   G4LogicalVolume*   pmt_log;
   G4VPhysicalVolume* pmt_phys;
+  G4VPhysicalVolume* pmt_phys_reflect;
 
   G4LogicalVolume*   phcath_log;
   G4VPhysicalVolume* phcath_phys;
+  G4VPhysicalVolume* phcath_phys_reflect;
 
 
   //  pointer to sensitive detectors
   G4Cache<DMXPmtSD*> pmtSD;
-  G4Cache<DMXScintSD*> LXeSD; 
+  G4Cache<DMXScintSD*> LXeSD;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

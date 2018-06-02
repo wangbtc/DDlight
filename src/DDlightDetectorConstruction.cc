@@ -44,6 +44,8 @@
 #include "G4ThreeVector.hh"
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4ReflectionFactory.hh"
+#include "G4SubtractionSolid.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -51,12 +53,17 @@ DDlightDetectorConstruction::DDlightDetectorConstruction()
     : G4VUserDetectorConstruction(), fLXe_mt(NULL)
 {
   fLXe = NULL;
-  fExpHall_x = fExpHall_y = fExpHall_z = 10.0 * m;
-  fTank_x = fTank_y = fTank_z = 5.0 * m;
-  fBox_x = fBox_y = fBox_z = 0.0 * mm;
-  fBottle_x = fBottle_y = fBottle_z = 0.0 * mm;
-  //fLXeVol_x = fLXeVol_y = fLXeVol_z = 1.0 * m;
-  //fBubble_x = fBubble_y = fBubble_z = 0.5 * m;
+  fExpHall_x = fExpHall_y = fExpHall_z = 2.0 * m;
+  fTank_x = fTank_y = 33 * mm;
+  fTank_z = 60.0 * mm;
+  fBox_x = fBox_y =  20.5 * mm;
+  fBox_z = 11.5 * mm;
+  //fBottle_Rmin  = 12.5 * cm;
+  //fBottle_Rmax  = 12.51 * cm;
+  //fBottle_Z = 21.5 * cm;
+  fLXeVol_x = fLXeVol_y =21.5*mm;
+  fLXeVol_z = 12.5 * mm;
+  fBubble_x = fBubble_y = fBubble_z = 0.5 * m;
 
   //Zero the G4Cache objects to contain logical volumes
   pmtSD.Put(0);
@@ -74,7 +81,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   // ------------- Materials -------------
 
   G4double a, z, density;
-  G4int nelements;
+  G4int nelements,natoms;
 
   // Air
   //
@@ -137,22 +144,27 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   quartz->SetMaterialPropertiesTable(quartz_mt);
 
   //Glass
-  G4Material* Glass = new G4Material("Glass", density=1.032*g/cm3,2);
+  G4Element *C = new G4Element("Carbon", "C", z = 6, a= 12.01 * g / mole);
+
+  G4Material* Glass = new G4Material("Glass", density=1.032*g/cm3,nelements = 2);
   Glass->AddElement(C,91.533*perCent);
   Glass->AddElement(H,8.467*perCent);
 
   //Teflon
-  G4Material* Teflon = new G4Material("Teflon", density=2.2*g/cm3,2);
+  G4Element* F = new G4Element("Fluorine", "F", z=9., a=18.9984*g/mole);
+
+
+  G4Material* Teflon = new G4Material("Teflon", density=2.2*g/cm3,nelements = 2);
   Teflon->AddElement(C,natoms=2);
   Teflon->AddElement(F,natoms=4);
 
   // Set the Birks Constant for the LXe scintillator
 
-  //fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
-  //if (fLXe_mt)
-    //fLXe_mt->AddConstProperty("SCINTILLATIONYIELD", 12000. / MeV);
+  fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
+  if (fLXe_mt)
+    fLXe_mt->AddConstProperty("SCINTILLATIONYIELD", 12000. / MeV);
 
-  /*G4double photonEnergy[] =
+  G4double photonEnergy[] =
       {2.034 * eV, 2.068 * eV, 2.103 * eV, 2.139 * eV,
        2.177 * eV, 2.216 * eV, 2.256 * eV, 2.298 * eV,
        2.341 * eV, 2.386 * eV, 2.433 * eV, 2.481 * eV,
@@ -162,7 +174,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
        3.353 * eV, 3.446 * eV, 3.545 * eV, 3.649 * eV,
        3.760 * eV, 3.877 * eV, 4.002 * eV, 4.136 * eV};
 
-  const G4int nEntries = sizeof(photonEnergy) / sizeof(G4double);*/
+  const G4int nEntries = sizeof(photonEnergy) / sizeof(G4double);
 
   //
   // Water
@@ -332,23 +344,48 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4VPhysicalVolume *expHall_phys = new G4PVPlacement(0, G4ThreeVector(), expHall_log, "World", 0, false, 0);
 
   // The Water Tank
-  //
+
   G4Box *waterTank_box = new G4Box("Tank", fTank_x, fTank_y, fTank_z);
-  G4LogicalVolume *waterTank_log = new G4LogicalVolume(waterTank_box, water, "Tank", 0, 0, 0);
+  G4LogicalVolume *waterTank_log = new G4LogicalVolume(waterTank_box, air, "Tank", 0, 0, 0);
   G4VPhysicalVolume *waterTank_phys = new G4PVPlacement(0, G4ThreeVector(), waterTank_log, "Tank", expHall_log, false, 0);
   G4VisAttributes vis_attr_wat;
-  vis_attr_wat.SetColour(0, 0, 1);
+  vis_attr_wat.SetColour(1, 1, 1);
   waterTank_log->SetVisAttributes(vis_attr_wat);
   // The LXe
   //
+  G4RotationMatrix* rotD4 = new G4RotationMatrix();
+  rotD4->rotateX(90.*deg);
   G4Box *LXeVol_box = new G4Box("LXeVol", fLXeVol_x, fLXeVol_y, fLXeVol_z);
-  G4LogicalVolume *LXeVol_log = new G4LogicalVolume(LXeVol_box, fLXe, "LXeVol", 0, 0, 0);
+  //G4Tubs *LXeVol_box = new G4Tubs("LXeVol", fBottle_Rmin, fBottle_Rmax, fBottle_Z,0.0*deg,360* deg);
+  //G4LogicalVolume *LXeVol_log = new G4LogicalVolume(LXeVol_box, fLXe, "LXeVol", 0, 0, 0);
+  //G4VPhysicalVolume *LXeVol_phys = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log, "LXeVol", expHall_log, false, 0);
+  //G4VisAttributes vis_attr_lxe;
+  //vis_attr_lxe.SetColour(1, 0, 0);
+  //vis_attr_lxe.SetForceSolid(true);
+  //LXeVol_log->SetVisAttributes(vis_attr_lxe);
+
+  //Inner LXe
+
+  G4Box *LXeVol_box_inner = new G4Box("LXeVol_inner", fBox_x, fBox_y, fBox_z);
+  //G4Tubs *LXeVol_box = new G4Tubs("LXeVol", fBottle_Rmin, fBottle_Rmax, fBottle_Z,0.0*deg,360* deg);
+
+
+
+  G4SubtractionSolid* subtraction = new G4SubtractionSolid(" Box with thickness ",LXeVol_box,LXeVol_box_inner);
+  G4LogicalVolume *LXeVol_log = new G4LogicalVolume(subtraction, air, "LXeVol", 0, 0, 0);
   G4VPhysicalVolume *LXeVol_phys = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log, "LXeVol", expHall_log, false, 0);
   G4VisAttributes vis_attr_lxe;
   vis_attr_lxe.SetColour(1, 0, 0);
   vis_attr_lxe.SetForceSolid(true);
   LXeVol_log->SetVisAttributes(vis_attr_lxe);
 
+
+  G4LogicalVolume *LXeVol_log_inner = new G4LogicalVolume(LXeVol_box_inner, Glass, "LXeVol_inner", 0, 0, 0);
+  G4VPhysicalVolume *LXeVol_phys_inner = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log_inner, "LXeVol_inner", LXeVol_log, false, 0);
+  G4VisAttributes vis_attr_lxe_inner;
+  vis_attr_lxe_inner.SetColour(0, 0, 0);
+  vis_attr_lxe_inner.SetForceSolid(true);
+  LXeVol_log_inner->SetVisAttributes(vis_attr_lxe_inner);
   // The Air Bubble
   //
   //   G4Box* bubbleAir_box = new G4Box("Bubble",fBubble_x,fBubble_y,fBubble_z);
@@ -399,12 +436,18 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   //The PMTs
   // Photomultiplier: ETL 9829 QA ****************************************
 
-  //  G4double pmtHeight    = 12.0*cm;
-  //  G4double pmtRadius    = 2.6*cm;
+    //G4double pmtHeight    = 12.0*cm;
+    //G4double pmtRadius    = 2.6*cm;
   G4double pmtHeight = 20.0 * cm;
-  G4double pmtRadius = 500 * cm;
+  G4double pmtRadius = 2.54 * cm;
   G4double pmtVOffset = 1.0 * cm;
-  G4double pmtVPosition = -5 * m; //-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
+  G4double pmtVPosition = -121.9 * mm; //-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
+
+  G4RotationMatrix* rotD3 = new G4RotationMatrix();
+  rotD3->rotateX(90.*deg);
+
+
+
 
   G4Sphere *pmt_window = new G4Sphere("pmt_sphere", 0. * cm, 2. * pmtRadius, 0. * deg, 360. * deg, 0. * deg, 30.0 * deg);
   G4Tubs *pmt_tube = new G4Tubs("pmt_tube", 0. * cm, pmtRadius, 0.5 * pmtHeight, 0. * deg, 360. * deg);
@@ -412,14 +455,19 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4UnionSolid *pmt_sol = new G4UnionSolid("pmt_sol", pmt_tube, pmt_window, G4Transform3D(G4RotationMatrix(), G4ThreeVector(0, 0, 0.5 * pmtHeight - 2. * pmtRadius * std::cos(30.0 * deg))));
 
   pmt_log = new G4LogicalVolume(pmt_sol, quartz, "pmt_log", 0, 0, 0);
-  pmt_phys = new G4PVPlacement(0, G4ThreeVector(0. * cm, 0. * cm, pmtVPosition), "pmt_phys", pmt_log, LXeVol_phys, false, 0);
-  pmt_phys_reflect = new G4PVPlacement(0, G4ThreeVector(0. * cm, 0. * cm, -pmtVPosition), "pmt_phys_reflect", pmt_log, LXeVol_phys, false, 0);
+  pmt_phys = new G4PVPlacement(0, G4ThreeVector(0. * cm,  0. * cm,pmtVPosition), "pmt_phys", pmt_log, expHall_phys, false, 0);
+  pmt_phys_reflect = new G4PVPlacement(0, G4ThreeVector(0. * cm,0.0*mm, 121.9 * mm ), "pmt_phys_reflect", pmt_log, expHall_phys, false, 0);
+  //Set reflected volumes
+  //G4Transform3D transformg4 = 0;
+  //G4PhysicalVolumesPair pmt_phys_reflect =  G4ReflectionFactory::Instance()->Place(G4Transform3D(G4RotationMatrix(), G4ThreeVector(0, 0, 0.5 * pmtHeight - 2. * pmtRadius * std::cos(30.0 * deg))),"pmt_phys",pmt_log,expHall_phys,false,1,false);
+
 
   G4OpticalSurface *pmt_opsurf = new G4OpticalSurface("pmt_opsurf", unified, polished, dielectric_dielectric);
   G4LogicalBorderSurface *pmt_surf = new G4LogicalBorderSurface("pmt_surf", LXeVol_phys, pmt_phys, pmt_opsurf);
+
   G4LogicalBorderSurface *pmt_surf_reflect = new G4LogicalBorderSurface("pmt_surf_reflect", LXeVol_phys, pmt_phys_reflect, pmt_opsurf);
   G4VisAttributes vis_attr;
-  vis_attr.SetColour(1.0, 0.0, 1.0);
+  vis_attr.SetColour(0.0, 0.0, 1.0);
   vis_attr.SetForceSolid(true);
   pmt_log->SetVisAttributes(vis_attr);
 
@@ -520,7 +568,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4double specularSpike[num] = {0.2, 0.2};
   G4double backScatter[num] = {0.2, 0.2};
 
-  G4MaterialPropertiesTable *myST1 = new G4MaterialPropertiesTable();
+  /*G4MaterialPropertiesTable *myST1 = new G4MaterialPropertiesTable();
 
   myST1->AddProperty("RINDEX", ephoton, refractiveIndex, num);
   myST1->AddProperty("SPECULARLOBECONSTANT", ephoton, specularLobe, num);
@@ -530,7 +578,36 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4cout << "Water Surface G4MaterialPropertiesTable" << G4endl;
   myST1->DumpTable();
 
-  opWaterSurface->SetMaterialPropertiesTable(myST1);
+  opWaterSurface->SetMaterialPropertiesTable(myST1);*/
+
+  ////////////////////////Teflon_LaBr:LXe Surface///////////////////////////////
+  /*G4OpticalSurface* OpSurface1 = new G4OpticalSurface("opSurface1");
+  OpSurface1->SetType(dielectric_metal);
+  OpSurface1->SetModel(unified);
+  OpSurface1->SetFinish(polished);
+  OpSurface1->SetSigmaAlpha(0.0);
+
+
+  //we specify the Teflon properties for energies at both ends of scintil. spec.
+
+  //G4double specularlobe1[nEntries] = {0.0,0.0,0.0,0.0,0.0};
+  //G4double specularspike1[nEntries] = {0.0,0.0,0.0,0.0,0.0};
+  //G4double backscatter1[nEntries] = {0.0,0.0,0.0,0.0,0.0};
+  G4double reflectivity1[nEntries] = {0.95,0.95,0.95,0.95,0.95}; //reflection coef in DETECT
+  G4double efficiency1[nEntries] = {0.0,0.0,0.0,0.0,0.0};
+
+  G4MaterialPropertiesTable* s1MPT = new G4MaterialPropertiesTable();
+
+  //s1MPT->AddProperty("SPECULARLOBECONSTANT",LaBr_Energy,specularlobe1,nEntries);
+  //s1MPT->AddProperty("SPECULARSPIKECONSTANT",LaBr_Energy,specularspike1,nEntries);
+  //s1MPT->AddProperty("BACKSCATTERCONSTANT",LaBr_Energy,backscatter1,nEntries);
+  s1MPT->AddProperty("REFLECTIVITY",LaBr_Energy,reflectivity1,nEntries);
+  s1MPT->AddProperty("EFFICIENCY",LaBr_Energy,efficiency1,nEntries);
+
+  OpSurface1->SetMaterialPropertiesTable(s1MPT);
+
+  new G4LogicalBorderSurface("opSurface1", physiScint, LXeVol_phys, OpSurface1);*/
+  /////////////////////////////////////////////////////////////////////////////////////////
 
   //OpticalLXeSurface
   G4double refractiveIndexLXe[num] = {1.59, 1.62};
@@ -546,6 +623,8 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   myST3->DumpTable();
 
   opLXeSurface->SetMaterialPropertiesTable(myST3);
+
+
 
   //OpticalAirSurface
   // G4double reflectivity[num] = {0.3, 0.5};
