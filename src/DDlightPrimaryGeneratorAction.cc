@@ -44,7 +44,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 DDlightPrimaryGeneratorAction::DDlightPrimaryGeneratorAction()
- : G4VUserPrimaryGeneratorAction(), 
+ : G4VUserPrimaryGeneratorAction(),
    fParticleGun(0)
 {
   G4int n_particle = 1;
@@ -56,13 +56,14 @@ DDlightPrimaryGeneratorAction::DDlightPrimaryGeneratorAction()
   //default kinematic
   //
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4ParticleDefinition* particle = particleTable->FindParticle("e+");
+  //G4ParticleDefinition* particle = particleTable->FindParticle("e+");
+  G4ParticleDefinition* particle = particleTable->FindParticle("gamma");
 
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleTime(0.0*ns);
-  fParticleGun->SetParticlePosition(G4ThreeVector(0.0*cm,0.0*cm,0.0*cm));
+  fParticleGun->SetParticlePosition(G4ThreeVector(0.0*cm,-30.5*mm,0.0*cm));
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1.,0.,0.));
-  fParticleGun->SetParticleEnergy(500.0*keV);
+  fParticleGun->SetParticleEnergy(661.7*keV);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -117,11 +118,11 @@ void DDlightPrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
  G4ThreeVector kphoton = fParticleGun->GetParticleMomentumDirection();
  G4ThreeVector product = normal.cross(kphoton);
  G4double modul2       = product*product;
- 
+
  G4ThreeVector e_perpend (0., 0., 1.);
  if (modul2 > 0.) e_perpend = (1./std::sqrt(modul2))*product;
  G4ThreeVector e_paralle    = e_perpend.cross(kphoton);
- 
+
  G4ThreeVector polar = std::cos(angle)*e_paralle + std::sin(angle)*e_perpend;
  fParticleGun->SetParticlePolarization(polar);
 }

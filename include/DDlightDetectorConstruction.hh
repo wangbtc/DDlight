@@ -60,6 +60,10 @@ class DDlightDetectorConstruction : public G4VUserDetectorConstruction
     G4double fTank_y;
     G4double fTank_z;
 
+    G4double fTank_teflon_x;
+    G4double fTank_teflon_y;
+    G4double fTank_teflon_z;
+
     G4double fBox_x;
     G4double fBox_y;
     G4double fBox_z;
