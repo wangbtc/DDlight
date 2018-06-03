@@ -514,7 +514,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4double pmtVPosition = -121.9 * mm; //-0.5*(LXeTubeHeight+pmtHeight)+pmtVOffset;
 
   G4RotationMatrix* rotD3 = new G4RotationMatrix();
-  rotD3->rotateX(90.*deg);
+  rotD3->rotateY(180.*deg);
 
 
 
@@ -526,7 +526,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
 
   pmt_log = new G4LogicalVolume(pmt_sol, quartz, "pmt_log", 0, 0, 0);
   pmt_phys = new G4PVPlacement(0, G4ThreeVector(0. * cm,  0. * cm,pmtVPosition), "pmt_phys", pmt_log, expHall_phys, false, 0);
-  pmt_phys_reflect = new G4PVPlacement(0, G4ThreeVector(0. * cm,0.0*mm, 121.9 * mm ), "pmt_phys_reflect", pmt_log, expHall_phys, false, 0);
+  pmt_phys_reflect = new G4PVPlacement(rotD3, G4ThreeVector(0. * cm,0.0*mm, 121.9 * mm ), "pmt_phys_reflect", pmt_log, expHall_phys, false, 0);
   //Set reflected volumes
   //G4Transform3D transformg4 = 0;
   //G4PhysicalVolumesPair pmt_phys_reflect =  G4ReflectionFactory::Instance()->Place(G4Transform3D(G4RotationMatrix(), G4ThreeVector(0, 0, 0.5 * pmtHeight - 2. * pmtRadius * std::cos(30.0 * deg))),"pmt_phys",pmt_log,expHall_phys,false,1,false);
