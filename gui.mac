@@ -9,6 +9,7 @@
 #/vis/viewer/set/style surface
 /vis/open OGL
 /vis/viewer/set/viewpointThetaPhi 70 20
+/tracking/verbose 3
 #
 # Add icons of general interest
 #
@@ -20,7 +21,7 @@
 #
 # Run menu :
 /gui/addMenu run Run
-/gui/addButton run "beamOn 1" "/run/beamOn 1"
+/gui/addButton run "beamOn 100" "/run/beamOn 100"
 #/gui/addButton run run1 "/control/execute run1.mac"
 #/gui/addButton run run2 "/control/execute run2.mac"
 #
@@ -51,6 +52,6 @@
 /gui/addButton viewer "Update scene" "/vis/scene/notifyHandlers"
 #
 # User defined icon :
-/gui/addIcon "Run beam on" user_icon "/run/beamOn 1" run.png 
+/gui/addIcon "Run beam on" user_icon "/run/beamOn 100" run.png 
 
 

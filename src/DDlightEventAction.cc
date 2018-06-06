@@ -283,8 +283,8 @@ void DDlightEventAction::EndOfEventAction(const G4Event *evt)
   }
 
   // write out event summary
-  // if(saveHitsFlag)
-  //   writeScintHitsToFile();
+  if(saveHitsFlag)
+    writeScintHitsToFile();
 
   // draw trajectories
   // if(drawColsFlag=="standard" && drawTrksFlag!="none")

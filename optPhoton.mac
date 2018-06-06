@@ -5,5 +5,5 @@
 /gun/energy 3 MeV
 #
 /gun/position 0 0 -4 m
-/gun/direction 0 0 -1
+/gun/direction 1 1 1
 /run/beamOn 1

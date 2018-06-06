@@ -37,7 +37,7 @@
 // Created:     1996-04-30
 // Author:      Juliet Armstrong
 // mail:        gum@triumf.ca
-//     
+//
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 #ifdef G4MULTITHREADED
@@ -145,8 +145,8 @@ int main(int argc,char** argv)
 
   // Get the pointer to the User Interface manager
   //
-  G4UImanager* UImanager = G4UImanager::GetUIpointer(); 
-   
+  G4UImanager* UImanager = G4UImanager::GetUIpointer();
+
   if ( macro.size() ) {
     // Batch mode
     G4String command = "/control/execute ";
@@ -154,18 +154,18 @@ int main(int argc,char** argv)
   }
   else // Define UI session for interactive mode
     {
-#ifdef G4UI_USE
-      G4UIExecutive * ui = new G4UIExecutive(argc,argv,session);
-#ifdef G4VIS_USE
-      UImanager->ApplyCommand("/control/execute vis.mac");
-#else
+//#ifdef G4UI_USE
+//      G4UIExecutive * ui = new G4UIExecutive(argc,argv,session);
+//#ifdef G4VIS_USE
+//      UImanager->ApplyCommand("/control/execute vis.mac");
+//#else
       UImanager->ApplyCommand("/control/execute DDlight.in");
-#endif
-      if (ui->IsGUI())
-        UImanager->ApplyCommand("/control/execute gui.mac");
-      ui->SessionStart();
-      delete ui;
-#endif
+//#endif
+      //if (ui->IsGUI())
+      //  UImanager->ApplyCommand("/control/execute gui.mac");
+      //ui->SessionStart();
+      //delete ui;
+//#endif
     }
 
   // Job termination
