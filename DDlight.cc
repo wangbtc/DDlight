@@ -154,18 +154,18 @@ int main(int argc,char** argv)
   }
   else // Define UI session for interactive mode
     {
-//#ifdef G4UI_USE
-//      G4UIExecutive * ui = new G4UIExecutive(argc,argv,session);
-//#ifdef G4VIS_USE
-//      UImanager->ApplyCommand("/control/execute vis.mac");
-//#else
+#ifdef G4UI_USE
+      G4UIExecutive * ui = new G4UIExecutive(argc,argv,session);
+#ifdef G4VIS_USE
+      UImanager->ApplyCommand("/control/execute vis.mac");
+#else
       UImanager->ApplyCommand("/control/execute DDlight.in");
-//#endif
-      //if (ui->IsGUI())
-      //  UImanager->ApplyCommand("/control/execute gui.mac");
-      //ui->SessionStart();
-      //delete ui;
-//#endif
+#endif
+      if (ui->IsGUI())
+        UImanager->ApplyCommand("/control/execute gui.mac");
+      ui->SessionStart();
+      delete ui;
+#endif
     }
 
   // Job termination

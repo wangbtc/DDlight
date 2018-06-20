@@ -63,9 +63,9 @@ DDlightPrimaryGeneratorAction::DDlightPrimaryGeneratorAction()
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleTime(0.0*ns);
   fParticleGun->SetParticlePosition(G4ThreeVector(0.0*cm,-30.5*mm,0.0*cm));
-  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,1.,0.));
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,1.,0.));
   //Generate the momentum randomly
-  fParticleGun->SetParticleMomentum(G4RandomDirection());
+  //fParticleGun->SetParticleMomentum(G4RandomDirection());
   fParticleGun->SetParticleEnergy(661.7*keV);
 }
 

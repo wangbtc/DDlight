@@ -9,7 +9,7 @@
 #/vis/viewer/set/style surface
 /vis/open OGL
 /vis/viewer/set/viewpointThetaPhi 70 20
-/tracking/verbose 3
+/tracking/verbose 4
 #
 # Add icons of general interest
 #

@@ -84,6 +84,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
 
   G4double a, z, density;
   G4int nelements,natoms;
+  G4double constC = 299792458.;
 
   // Air
   //
@@ -104,6 +105,35 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
 
   //define LXe
   fLXe = new G4Material("LXe", z = 54., a = 131.29 * g / mole, density = 3.020 * g / cm3);
+
+
+  // lineaer akyl benzene (LAB) is actually a generic term for a class of
+  // chemical compositions
+  // this is an avergae for "typical" LAB
+  // update: was a percentage, now gives correct atoms/volume
+  // using schematic formala CH_1.8
+
+  G4Isotope *C12 = new G4Isotope( "C12", 6, 12, 12.*g/mole );
+  G4Isotope *C13 = new G4Isotope( "C13", 6, 13, 13.003354826*g/mole );
+
+  G4Isotope *H1 = new G4Isotope( "H1", 1, 1, 1.007825035*g/mole );
+  G4Isotope *H2 = new G4Isotope( "H2", 1, 2, 2.014101779*g/mole );
+
+
+
+  G4Element *natC = new G4Element( "Natural C", "natC", 2 );
+  natC->AddIsotope( C12, 98.93*perCent );
+  natC->AddIsotope( C13, 1.07*perCent );
+
+  G4Element *natH = new G4Element( "Natural H", "natH", 2 );
+  natH->AddIsotope( H1, 99.9885*perCent );
+  natH->AddIsotope( H2, 0.0115*perCent );
+
+
+
+  G4Material *lab = new G4Material( "lab", 0.860*g/cm3, 2 );
+  lab->AddElement( natC, 10 ); //was 35.5*perCent
+  lab->AddElement( natH, 18 ); //was 64.5*perCent
 
   //
   // ------------ Generate & Add Material Properties Table ------------
@@ -386,14 +416,14 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   G4Box *Sample_box = new G4Box("Tank", fTank_x, fTank_y, fTank_z);
 
   G4SubtractionSolid* subtraction2 = new G4SubtractionSolid(" Box with thickness for teflon ",Sample_box,teflon_layer);
-  G4LogicalVolume *tank_layer_log = new G4LogicalVolume(subtraction2, Teflon, "tank_layer_log", 0, 0, 0);
-  G4VPhysicalVolume *tank_layer_phys = new G4PVPlacement(0, G4ThreeVector(), tank_layer_log, "tank_layer_log", expHall_log, false, 0);
+  G4LogicalVolume *tank_layer_log = new G4LogicalVolume(subtraction2, Teflon, "teflon_layer_log", 0, 0, 0);
+  G4VPhysicalVolume *tank_layer_phys = new G4PVPlacement(0, G4ThreeVector(), tank_layer_log, "teflon_layer_phys", expHall_log, false, 0);
   G4VisAttributes vis_attr_wat;
   vis_attr_wat.SetColour(1, 1, 1);
   tank_layer_log->SetVisAttributes(vis_attr_wat);
 
   G4LogicalVolume *Sample_box_log = new G4LogicalVolume(teflon_layer, air, "Tank", 0, 0, 0);
-  G4VPhysicalVolume *Sample_box_phys = new G4PVPlacement(0, G4ThreeVector(), Sample_box_log, "Tank", expHall_log, false, 0);
+  G4VPhysicalVolume *Sample_box_phys = new G4PVPlacement(0, G4ThreeVector(), Sample_box_log, "Sample_box", expHall_log, false, 0);
 
   // The LXe
   //
@@ -417,15 +447,15 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
 
   G4SubtractionSolid* subtraction = new G4SubtractionSolid(" Box with thickness ",LXeVol_box,LXeVol_box_inner);
   G4LogicalVolume *LXeVol_log = new G4LogicalVolume(subtraction, Glass, "LXeVol", 0, 0, 0);
-  G4VPhysicalVolume *LXeVol_phys = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log, "LXeVol", expHall_log, false, 0);
+  G4VPhysicalVolume *LXeVol_phys = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log, "Glass_bottle", expHall_log, false, 0);
   G4VisAttributes vis_attr_lxe;
   vis_attr_lxe.SetColour(1, 0, 0);
   vis_attr_lxe.SetForceSolid(true);
   LXeVol_log->SetVisAttributes(vis_attr_lxe);
 
 
-  G4LogicalVolume *LXeVol_log_inner = new G4LogicalVolume(LXeVol_box_inner, fLXe, "LXeVol_inner", 0, 0, 0);
-  G4VPhysicalVolume *LXeVol_phys_inner = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log_inner, "LXeVol_inner", LXeVol_log, false, 0);
+  G4LogicalVolume *LXeVol_log_inner = new G4LogicalVolume(LXeVol_box_inner, water, "LXeVol_inner", 0, 0, 0);
+  G4VPhysicalVolume *LXeVol_phys_inner = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log_inner, "water_in_bottle", LXeVol_log, false, 0);
   G4VisAttributes vis_attr_lxe_inner;
   vis_attr_lxe_inner.SetColour(0, 0, 0);
   vis_attr_lxe_inner.SetForceSolid(true);
@@ -693,7 +723,49 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   myST3->DumpTable();
 
   opLXeSurface->SetMaterialPropertiesTable(myST3);*/
+  // LAB Properties
+  /*photonWavelengths = new G4double[NUM_PP];
+  photonWavelengths[0] = 110.0;
+  photonWavelengths[1] = 144.5;
+  photonWavelengths[2] = 175.8641;
+  photonWavelengths[3] = 177.6278;
+  photonWavelengths[4] = 179.4272;
+  photonWavelengths[5] = 193.6;
+  photonWavelengths[6] = 250.3;
+  photonWavelengths[7] = 303.4;
+  photonWavelengths[8] = 340.4;
+  photonWavelengths[9] = 410.2;
+  photonWavelengths[10] = 467.8;
+  photonWavelengths[11] = 508.6;
+  photonWavelengths[12] = 546.1;
+  photonWavelengths[13] = 627.8;
+  photonWavelengths[14] = 706.5;
+  photonWavelengths[15] = 766.5;
+  photonWavelengths[16] = 844.7;
+  photonWavelengths[17] = 1000.0;
+  photonWavelengths[18] = 1300.0;
+  photonWavelengths[19] = 1529.6;
+  photonWavelengths[20] = 1600.0;
+  photonWavelengths[21] = 1800.0;
+  photonWavelengths[22] = 2058.2;
 
+  photonEnergies = new G4double[23];
+    for( G4int i=0; i<23; i++ )
+        photonEnergies[i] = (4.13566743E-15*constC/(photonWavelengths[i]*1.E-9))*eV;
+
+
+  labRindex = new G4double[2];
+  labRindex[0] = labRindex[1] = 1.485; // index of fraction for LAB is
+
+  photonEnergies_ConstProp = new G4double[2];
+  photonEnergies_ConstProp[0] = photonEnergies[0];
+  photonEnergies_ConstProp[1] = photonEnergies[22];
+
+
+  labMat = new G4MaterialPropertiesTable();
+  labMat->AddProperty( "RINDEX", photonEnergies_ConstProp,labRindex,2);
+  lab->SetMaterialPropertiesTable( labMat );
+  */
 
 
   //OpticalAirSurface
