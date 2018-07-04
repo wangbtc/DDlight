@@ -58,8 +58,8 @@ DDlightDetectorConstruction::DDlightDetectorConstruction()
   fTank_z = 60.0 * mm;
   fTank_teflon_x = fTank_teflon_y = 32*mm;
   fTank_teflon_z = 59*mm;
-  fBox_x = fBox_y =  20.5 * mm;
-  fBox_z = 11.5 * mm;
+  fBox_x = fBox_y =  21.4 * mm;
+  fBox_z = 12.4 * mm;
   //fBottle_Rmin  = 12.5 * cm;
   //fBottle_Rmax  = 12.51 * cm;
   //fBottle_Z = 21.5 * cm;
@@ -422,7 +422,7 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
   vis_attr_wat.SetColour(1, 1, 1);
   tank_layer_log->SetVisAttributes(vis_attr_wat);
 
-  G4LogicalVolume *Sample_box_log = new G4LogicalVolume(teflon_layer, air, "Tank", 0, 0, 0);
+  G4LogicalVolume *Sample_box_log = new G4LogicalVolume(teflon_layer, Glass, "Tank", 0, 0, 0);
   G4VPhysicalVolume *Sample_box_phys = new G4PVPlacement(0, G4ThreeVector(), Sample_box_log, "Sample_box", expHall_log, false, 0);
 
   // The LXe
@@ -446,20 +446,20 @@ G4VPhysicalVolume *DDlightDetectorConstruction::Construct()
 
 
   G4SubtractionSolid* subtraction = new G4SubtractionSolid(" Box with thickness ",LXeVol_box,LXeVol_box_inner);
-  G4LogicalVolume *LXeVol_log = new G4LogicalVolume(subtraction, Glass, "LXeVol", 0, 0, 0);
+  G4LogicalVolume *LXeVol_log = new G4LogicalVolume(subtraction, air, "LXeVol", 0, 0, 0);
   G4VPhysicalVolume *LXeVol_phys = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log, "Glass_bottle", expHall_log, false, 0);
   G4VisAttributes vis_attr_lxe;
-  vis_attr_lxe.SetColour(1, 0, 0);
-  vis_attr_lxe.SetForceSolid(true);
-  LXeVol_log->SetVisAttributes(vis_attr_lxe);
+  //vis_attr_lxe.SetColour(1, 0, 0);
+  //vis_attr_lxe.SetForceSolid(true);
+  //LXeVol_log->SetVisAttributes(vis_attr_lxe);
 
 
-  G4LogicalVolume *LXeVol_log_inner = new G4LogicalVolume(LXeVol_box_inner, water, "LXeVol_inner", 0, 0, 0);
+  G4LogicalVolume *LXeVol_log_inner = new G4LogicalVolume(LXeVol_box_inner, fLXe, "LXeVol_inner", 0, 0, 0);
   G4VPhysicalVolume *LXeVol_phys_inner = new G4PVPlacement(0, G4ThreeVector(), LXeVol_log_inner, "water_in_bottle", LXeVol_log, false, 0);
   G4VisAttributes vis_attr_lxe_inner;
-  vis_attr_lxe_inner.SetColour(0, 0, 0);
-  vis_attr_lxe_inner.SetForceSolid(true);
-  LXeVol_log_inner->SetVisAttributes(vis_attr_lxe_inner);
+  //vis_attr_lxe_inner.SetColour(0, 0, 0);
+  //vis_attr_lxe_inner.SetForceSolid(true);
+  //LXeVol_log_inner->SetVisAttributes(vis_attr_lxe_inner);
   // The Air Bubble
   //
   //   G4Box* bubbleAir_box = new G4Box("Bubble",fBubble_x,fBubble_y,fBubble_z);

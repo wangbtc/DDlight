@@ -167,16 +167,16 @@ void DDlightEventAction::EndOfEventAction(const G4Event *evt)
   man->FillNtupleDColumn(4, 0, 42);
   man->FillH1(13, 42);
 
-  if(scintillatorCollID<0||pmtCollID<0) return;
-  //if (pmtCollID < 0)
-  //  return;
+  //if(scintillatorCollID<0||pmtCollID<0) return;
+  if (pmtCollID < 0)
+    return;
   // address hits collections
-  DMXScintHitsCollection* SHC = NULL;
+  //DMXScintHitsCollection* SHC = NULL;
   DMXPmtHitsCollection *PHC = NULL;
   G4HCofThisEvent *HCE = evt->GetHCofThisEvent();
   if (HCE)
   {
-    SHC = (DMXScintHitsCollection*)(HCE->GetHC(scintillatorCollID));
+    //SHC = (DMXScintHitsCollection*)(HCE->GetHC(scintillatorCollID));
     PHC = (DMXPmtHitsCollection *)(HCE->GetHC(pmtCollID));
   }
 
@@ -203,7 +203,7 @@ void DDlightEventAction::EndOfEventAction(const G4Event *evt)
   start_neutron = false;
 
   // scintillator hits
-  if(SHC) {
+  /*if(SHC) {
     S_hits = SHC->entries();
 
     for (G4int i=0; i<S_hits; i++) {
@@ -250,7 +250,7 @@ void DDlightEventAction::EndOfEventAction(const G4Event *evt)
       if (event_id%printModulo == 0)
           G4cout << "     Total energy in LXe: "<< G4BestUnit(totEnergy,"Energy") << G4endl;
 
-  }
+  }*/
 /////////////////////////////////////////////////////////////////////////////////
   // PMT hits
   if (PHC)
@@ -282,9 +282,9 @@ void DDlightEventAction::EndOfEventAction(const G4Event *evt)
   }
 
   // write out event summary
-  if(saveHitsFlag)
+  /*if(saveHitsFlag)
     writeScintHitsToFile();
-
+    */
   // draw trajectories
   // if(drawColsFlag=="standard" && drawTrksFlag!="none")
   //   drawTracks(evt);
@@ -427,7 +427,7 @@ void DDlightEventAction::writePmtHitsToFile(const DMXPmtHitsCollection *hits)
       std::stringstream sss;
       sss << filename.c_str() << "." << G4Threading::G4GetThreadId();
       filename = sss.str();
-      //G4cout << "Filename is: " << filename << G4endl;
+      G4cout << "Filename is: " << filename << G4endl;
     }
     pmtfile = new std::ofstream;
     pmtfile->open(filename);
